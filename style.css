@@ -266,6 +266,8 @@ body {
 .form-group input[type="date"] {
     min-width: 0;
     max-width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .form-group input:focus {
