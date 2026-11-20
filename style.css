@@ -1452,477 +1452,6 @@ textarea,
     display: none;
 }
 
-@media (min-width: 810px) and (max-width: 1199px) {
-    .controls-bar {
-        align-items: center;
-        flex-wrap: nowrap;
-    }
-
-    .tabs {
-        width: auto;
-        flex: 0 0 auto;
-    }
-
-    .search-sort {
-        width: auto;
-        min-width: 0;
-        flex: 0 1 auto;
-    }
-
-    .search-box {
-        min-width: 140px;
-        flex: 0 1 200px;
-    }
-
-    .search-box input {
-        width: 100%;
-    }
-
-    .form-group input:not([type="hidden"]),
-    .search-box input,
-    .sort-box select,
-    .settings-section select,
-    textarea {
-        font-size: 12px;
-    }
-}
-
-@media (max-width: 809px) {
-    .navbar {
-        padding: 12px 16px;
-        padding-top: calc(12px + env(safe-area-inset-top));
-        position: static;
-    }
-
-    .nav-container {
-        gap: 8px;
-        padding: 0;
-    }
-
-    .logo-text {
-        font-size: 20px;
-    }
-
-    .nav-links {
-        gap: 12px;
-    }
-
-    .nav-link {
-        font-size: 12px;
-    }
-
-    .theme-toggle {
-        width: 41px;
-        height: 41px;
-        flex-shrink: 0;
-    }
-
-    .login-main {
-        padding: 40px 16px;
-    }
-
-    .login-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .hero-title {
-        font-size: 32px;
-    }
-
-    .auth-card {
-        padding: 28px 22px;
-    }
-
-    .dashboard-main {
-        padding: 0 16px;
-    }
-
-    .stats-group {
-        gap: 24px;
-    }
-
-    .stats-header {
-        align-items: center;
-        gap: 12px;
-    }
-
-    .btn-pill {
-        padding: 9px 12px;
-        font-size: 12px;
-    }
-
-    .controls-bar {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr);
-        align-items: stretch;
-        gap: 14px;
-        padding-bottom: 16px;
-        margin-bottom: 20px;
-    }
-
-    .tabs {
-        display: grid;
-        width: 100%;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 4px;
-        padding: 4px;
-        background: var(--glass-surface);
-        border: 0;
-    }
-
-    .tab-btn {
-        min-width: 0;
-        padding: 10px 4px;
-        font-size: clamp(11px, 1.5vw, 13px);
-        line-height: 1.35;
-    }
-
-    .tab-btn.active {
-        background: var(--glass-active);
-        box-shadow: inset 0 1px 0 var(--glass-highlight), 0 1px 4px rgba(0, 0, 0, 0.12);
-    }
-
-    .search-sort {
-        display: grid;
-        width: 100%;
-        grid-template-columns: minmax(0, 1fr) 144px;
-        align-items: stretch;
-        gap: 12px;
-    }
-
-    .search-box {
-        min-width: 0;
-    }
-
-    .search-box input {
-        width: 100%;
-        height: 44px;
-        padding: 10px 10px 10px 36px;
-    }
-
-    .sort-box {
-        position: relative;
-        display: flex;
-        align-items: center;
-    }
-
-    .sort-box select {
-        width: 100%;
-        height: 44px;
-        padding: 6px 30px 6px 12px;
-        font-size: 13px;
-        appearance: none;
-        -webkit-appearance: none;
-    }
-
-    .task-card {
-        grid-template-columns: 56px minmax(0, 1fr) auto;
-        gap: 12px;
-        padding: 14px 16px;
-    }
-
-    .task-card:not(:last-child)::after {
-        left: 84px;
-    }
-
-    .task-info {
-        min-width: 0;
-    }
-
-    .task-actions {
-        gap: 8px;
-    }
-
-    .due-badge-box {
-        width: 56px;
-        height: 60px;
-    }
-
-    .task-meta {
-        column-gap: 6px;
-    }
-
-    .form-row {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 0;
-    }
-
-    .about-main {
-        padding-top: 56px;
-    }
-
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .about-hero {
-        padding-bottom: 32px;
-        margin-bottom: 36px;
-    }
-
-    .account-trigger {
-        gap: 6px;
-        padding-right: 4px;
-    }
-
-    .account-trigger-email {
-        display: none;
-    }
-
-    .settings-card {
-        padding: 20px;
-    }
-}
-
-@media (max-width: 560px) {
-    body {
-        min-height: 100svh;
-    }
-
-    .dashboard-main {
-        margin-top: 18px;
-        margin-bottom: 60px;
-    }
-
-    .stats-header {
-        margin-bottom: 24px;
-    }
-
-    .task-card {
-        grid-template-columns: 82px minmax(0, 1fr) 44px;
-        grid-template-areas: "due info actions";
-        gap: 12px;
-        padding: 14px 16px;
-    }
-
-    .task-card:not(:last-child)::after {
-        display: none;
-    }
-
-    .task-info {
-        gap: 7px;
-    }
-
-    .task-title {
-        font-size: 16px;
-        font-weight: 500;
-    }
-
-    .task-meta {
-        column-gap: 8px;
-        row-gap: 8px;
-    }
-
-    .days-left-pill {
-        padding: 3px 8px;
-    }
-
-    .start-date-text {
-        font-size: 12px;
-    }
-
-    .task-actions {
-        justify-content: flex-end;
-    }
-
-    .modal-overlay {
-        align-items: center;
-        padding: 12px 10px calc(10px + env(safe-area-inset-bottom));
-    }
-
-    #task-modal.modal-overlay.open {
-        align-items: center;
-        justify-content: center;
-    }
-
-    .modal-card {
-        max-width: none;
-        max-height: calc(100svh - 24px - env(safe-area-inset-top));
-        overflow-y: auto;
-        padding: 20px 18px calc(18px + env(safe-area-inset-bottom));
-        border-radius: 28px;
-        margin-block: auto;
-        overscroll-behavior: contain;
-        animation: ios-sheet-in 0.22s ease-out;
-    }
-
-    .modal-header {
-        align-items: center;
-        margin-bottom: 18px;
-    }
-
-    .modal-header h3,
-    .modal-header h2 {
-        font-size: 20px;
-        line-height: 1.25;
-    }
-
-    .icon-btn {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: var(--glass-surface);
-        border: 0;
-        box-shadow: var(--glass-control-shadow), inset 0 1px 0 var(--glass-highlight);
-        -webkit-backdrop-filter: blur(16px) saturate(180%);
-        backdrop-filter: blur(16px) saturate(180%);
-        color: var(--text-primary);
-        font-size: 14px;
-    }
-
-    .form-group {
-        margin-bottom: 14px;
-    }
-
-    .form-group label {
-        margin-bottom: 8px;
-        font-size: 13px;
-    }
-
-    .form-group input,
-    .settings-section select {
-        height: 56px;
-        border-radius: 9999px;
-        padding: 12px 16px;
-        font-size: 16px;
-    }
-
-    .form-row {
-        gap: 0;
-    }
-
-    .modal-actions {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        margin-top: 16px;
-    }
-
-    .modal-actions .btn-primary,
-    .modal-actions .btn-secondary {
-        min-height: 56px;
-        height: 56px;
-        font-size: 16px;
-        font-weight: 700;
-    }
-
-    .modal-actions .btn-danger {
-        grid-column: 1 / -1;
-        min-height: 48px;
-    }
-
-    .modal-actions .btn-primary {
-        background: var(--bg-muted);
-        color: #ffffff;
-    }
-
-    .settings-card .settings-section {
-        margin-bottom: 14px;
-    }
-
-    @keyframes ios-sheet-in {
-        from {
-            transform: scale(0.98);
-            opacity: 0;
-        }
-        to {
-            transform: scale(1);
-            opacity: 1;
-        }
-    }
-
-    .form-group input:not([type="hidden"]),
-    .search-box input,
-    .settings-section select,
-    textarea {
-        font-size: 16px;
-    }
-
-    #task-modal.modal-overlay.open {
-        padding: 20px 16px;
-    }
-
-    #task-modal .modal-card {
-        max-width: 440px;
-        max-height: calc(100svh - 40px);
-        padding: 24px;
-        border-radius: var(--radius-lg);
-        margin: 0;
-    }
-
-    #task-modal .modal-header {
-        margin-bottom: 20px;
-    }
-
-    #task-modal .modal-header h3 {
-        font-size: 16px;
-        line-height: normal;
-    }
-
-    #task-modal .icon-btn {
-        width: 41px;
-        height: 41px;
-        background: none;
-        box-shadow: none;
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
-        color: var(--text-secondary);
-        font-size: 16px;
-    }
-
-    #task-modal .form-group {
-        margin-bottom: 16px;
-    }
-
-    #task-modal .form-group label {
-        margin-bottom: 6px;
-        font-size: 12px;
-    }
-
-    #task-modal .form-group input:not([type="hidden"]) {
-        height: auto;
-        padding: 10px 14px;
-        font-size: 14px;
-    }
-
-    #task-modal .form-group input[type="date"] {
-        height: 48px;
-        min-height: 48px;
-        font-size: 16px;
-    }
-
-    #task-modal .form-row {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 0;
-    }
-
-    #task-modal .modal-actions {
-        display: flex;
-        grid-template-columns: none;
-        gap: 10px;
-        margin-top: 20px;
-    }
-
-    #task-modal .modal-actions .btn-primary,
-    #task-modal .modal-actions .btn-secondary {
-        min-height: 44px;
-        height: 44px;
-        font-size: 13px;
-        font-weight: 500;
-    }
-
-    #task-modal .modal-actions .btn-primary {
-        background: var(--accent-blue);
-        color: #ffffff;
-    }
-
-    #task-modal .modal-actions .btn-danger {
-        grid-column: auto;
-        min-height: 41px;
-    }
-}
-
 .landing-main {
     width: min(100% - 64px, 1240px);
     margin: 0 auto;
@@ -2204,74 +1733,6 @@ textarea,
     font-size: 11px;
 }
 
-@media (max-width: 809px) {
-    .landing-main {
-        width: min(100% - 32px, 600px);
-        padding: 56px 0 72px;
-    }
-
-    .landing-hero {
-        grid-template-columns: 1fr;
-        gap: 42px;
-    }
-
-    .landing-copy .hero-title {
-        font-size: clamp(38px, 10vw, 54px);
-    }
-
-    .product-preview {
-        padding: 20px 16px;
-    }
-
-    .landing-features,
-    .how-it-works {
-        margin-top: 64px;
-        padding-top: 32px;
-    }
-
-    .landing-section-heading {
-        margin-bottom: 20px;
-    }
-
-    .how-steps {
-        grid-template-columns: 1fr;
-        gap: 22px;
-    }
-
-    .landing-footer {
-        margin: 0 16px;
-    }
-}
-
-@media (max-width: 560px) {
-    .landing-nav-secondary {
-        display: none;
-    }
-
-    .landing-actions {
-        gap: 16px;
-    }
-
-    .landing-note {
-        max-width: 300px;
-        line-height: 1.7;
-    }
-
-    .preview-task {
-        gap: 9px;
-    }
-
-    .preview-due {
-        padding: 4px 6px;
-        font-size: 8px;
-    }
-
-    .landing-footer {
-        flex-direction: column;
-        gap: 8px;
-    }
-}
-
 /* Dashboard: native-inspired, calm surfaces and clear spacing */
 #dashboard-view {
     background: var(--bg-subtle);
@@ -2279,14 +1740,14 @@ textarea,
 
 #dashboard-view .navbar {
     padding: 14px 0;
-    background: var(--glass-surface);
+    background: #ffffff;
     border-bottom: 0;
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
 }
 
 [data-theme="dark"] #dashboard-view .navbar {
-    background: rgba(12, 12, 14, 0.96);
+    background: #0c0c0e;
 }
 
 #dashboard-view .nav-container {
@@ -2321,8 +1782,11 @@ textarea,
 }
 
 #dashboard-view .account-menu {
+    background: var(--bg-main);
     border: 0;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
 }
 
 #dashboard-view .dashboard-main {
@@ -2552,7 +2016,536 @@ textarea,
     border-radius: 24px;
 }
 
-@media (max-width: 809px) {
+@media (min-width: 811px) and (max-width: 1199px) {
+    .controls-bar {
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    .tabs {
+        width: auto;
+        flex: 0 0 auto;
+    }
+
+    .search-sort {
+        width: auto;
+        min-width: 0;
+        flex: 0 1 auto;
+    }
+
+    .search-box {
+        min-width: 140px;
+        flex: 0 1 200px;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    input:not([type="hidden"]):focus,
+    textarea:focus,
+    select:focus {
+        font-size: 16px !important;
+    }
+}
+
+@media (max-width: 810px) {
+    .navbar {
+        padding: 12px 16px;
+        padding-top: calc(12px + env(safe-area-inset-top));
+        position: static;
+    }
+
+    .nav-container {
+        gap: 8px;
+        padding: 0;
+    }
+
+    .logo-text {
+        font-size: 20px;
+    }
+
+    .nav-links {
+        gap: 12px;
+    }
+
+    .nav-link {
+        font-size: 12px;
+    }
+
+    .theme-toggle {
+        width: 41px;
+        height: 41px;
+        flex-shrink: 0;
+    }
+
+    .login-main {
+        padding: 40px 16px;
+    }
+
+    .login-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .auth-card-wrapper {
+        order: -1;
+    }
+
+    .hero-title {
+        font-size: 32px;
+    }
+
+    .auth-card {
+        padding: 28px 22px;
+    }
+
+    .dashboard-main {
+        padding: 0 16px;
+    }
+
+    .stats-group {
+        gap: 24px;
+    }
+
+    .stats-header {
+        align-items: center;
+        gap: 12px;
+    }
+
+    .btn-pill {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+
+    .controls-bar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        align-items: stretch;
+        gap: 14px;
+        padding-bottom: 16px;
+        margin-bottom: 20px;
+    }
+
+    .tabs {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4px;
+        padding: 4px;
+        background: var(--glass-surface);
+        border: 0;
+    }
+
+    .tab-btn {
+        min-width: 0;
+        padding: 10px 4px;
+        font-size: clamp(11px, 1.5vw, 13px);
+        line-height: 1.35;
+    }
+
+    .tab-btn.active {
+        background: var(--glass-active);
+        box-shadow: inset 0 1px 0 var(--glass-highlight), 0 1px 4px rgba(0, 0, 0, 0.12);
+    }
+
+    .search-sort {
+        display: grid;
+        width: 100%;
+        grid-template-columns: minmax(0, 1fr) 144px;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .search-box {
+        min-width: 0;
+    }
+
+    .search-box input {
+        width: 100%;
+        height: 44px;
+        padding: 10px 10px 10px 36px;
+    }
+
+    .sort-box {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .sort-box select {
+        width: 100%;
+        height: 44px;
+        padding: 6px 30px 6px 12px;
+        appearance: none;
+        -webkit-appearance: none;
+    }
+
+    .task-card {
+        grid-template-columns: 56px minmax(0, 1fr) auto;
+        gap: 12px;
+        padding: 14px 16px;
+    }
+
+    .task-card:not(:last-child)::after {
+        left: 84px;
+    }
+
+    .task-info {
+        min-width: 0;
+    }
+
+    .task-actions {
+        gap: 8px;
+    }
+
+    .due-badge-box {
+        width: 56px;
+        height: 60px;
+    }
+
+    .task-meta {
+        column-gap: 6px;
+    }
+
+    .form-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+    }
+
+    .about-main {
+        padding-top: 56px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-hero {
+        padding-bottom: 32px;
+        margin-bottom: 36px;
+    }
+
+    .account-trigger {
+        gap: 6px;
+        padding-right: 4px;
+    }
+
+    .account-trigger-email {
+        display: none;
+    }
+
+    .settings-card {
+        padding: 20px;
+    }
+
+    body {
+        min-height: 100svh;
+    }
+
+    .dashboard-main {
+        margin-top: 18px;
+        margin-bottom: 60px;
+    }
+
+    .stats-header {
+        margin-bottom: 24px;
+    }
+
+    .task-card {
+        grid-template-columns: 82px minmax(0, 1fr) 44px;
+        grid-template-areas: "due info actions";
+        gap: 12px;
+        padding: 14px 16px;
+    }
+
+    .task-card:not(:last-child)::after {
+        display: none;
+    }
+
+    .task-info {
+        gap: 7px;
+    }
+
+    .task-title {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .task-meta {
+        column-gap: 8px;
+        row-gap: 8px;
+    }
+
+    .days-left-pill {
+        padding: 3px 8px;
+    }
+
+    .start-date-text {
+        font-size: 12px;
+    }
+
+    .task-actions {
+        justify-content: flex-end;
+    }
+
+    .modal-overlay {
+        align-items: center;
+        padding: 12px 10px calc(10px + env(safe-area-inset-bottom));
+    }
+
+    #task-modal.modal-overlay.open {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-card {
+        max-width: none;
+        max-height: calc(100svh - 24px - env(safe-area-inset-top));
+        overflow-y: auto;
+        padding: 20px 18px calc(18px + env(safe-area-inset-bottom));
+        border-radius: 28px;
+        margin-block: auto;
+        overscroll-behavior: contain;
+        animation: ios-sheet-in 0.22s ease-out;
+    }
+
+    .modal-header {
+        align-items: center;
+        margin-bottom: 18px;
+    }
+
+    .modal-header h3,
+    .modal-header h2 {
+        font-size: 20px;
+        line-height: 1.25;
+    }
+
+    .icon-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--glass-surface);
+        border: 0;
+        box-shadow: var(--glass-control-shadow), inset 0 1px 0 var(--glass-highlight);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        backdrop-filter: blur(16px) saturate(180%);
+        color: var(--text-primary);
+        font-size: 14px;
+    }
+
+    .form-group {
+        margin-bottom: 14px;
+    }
+
+    .form-group label {
+        margin-bottom: 8px;
+        font-size: 13px;
+    }
+
+    .form-group input,
+    .settings-section select {
+        height: 56px;
+        border-radius: 9999px;
+        padding: 12px 16px;
+    }
+
+    .form-row {
+        gap: 0;
+    }
+
+    .modal-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 16px;
+    }
+
+    .modal-actions .btn-primary,
+    .modal-actions .btn-secondary {
+        min-height: 56px;
+        height: 56px;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .modal-actions .btn-danger {
+        grid-column: 1 / -1;
+        min-height: 48px;
+    }
+
+    .modal-actions .btn-primary {
+        background: var(--bg-muted);
+        color: #ffffff;
+    }
+
+    .settings-card .settings-section {
+        margin-bottom: 14px;
+    }
+
+    @keyframes ios-sheet-in {
+        from {
+            transform: scale(0.98);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    #task-modal.modal-overlay.open {
+        padding: 20px 16px;
+    }
+
+    #task-modal .modal-card {
+        max-width: 440px;
+        max-height: calc(100svh - 40px);
+        padding: 24px;
+        border-radius: var(--radius-lg);
+        margin: 0;
+    }
+
+    #task-modal .modal-header {
+        margin-bottom: 20px;
+    }
+
+    #task-modal .modal-header h3 {
+        font-size: 16px;
+        line-height: normal;
+    }
+
+    #task-modal .icon-btn {
+        width: 41px;
+        height: 41px;
+        background: none;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        color: var(--text-secondary);
+        font-size: 16px;
+    }
+
+    #task-modal .form-group {
+        margin-bottom: 16px;
+    }
+
+    #task-modal .form-group label {
+        margin-bottom: 6px;
+        font-size: 12px;
+    }
+
+    #task-modal .form-group input:not([type="hidden"]) {
+        height: auto;
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    #task-modal .form-group input[type="date"] {
+        height: 48px;
+        min-height: 48px;
+    }
+
+    #task-modal .form-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+    }
+
+    #task-modal .modal-actions {
+        display: flex;
+        grid-template-columns: none;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    #task-modal .modal-actions .btn-primary,
+    #task-modal .modal-actions .btn-secondary {
+        min-height: 44px;
+        height: 44px;
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    #task-modal .modal-actions .btn-primary {
+        background: var(--accent-blue);
+        color: #ffffff;
+    }
+
+    #task-modal .modal-actions .btn-danger {
+        grid-column: auto;
+        min-height: 41px;
+    }
+
+    .landing-main {
+        width: min(100% - 32px, 600px);
+        padding: 56px 0 72px;
+    }
+
+    .landing-hero {
+        grid-template-columns: 1fr;
+        gap: 42px;
+    }
+
+    .landing-copy .hero-title {
+        font-size: clamp(38px, 10vw, 54px);
+    }
+
+    .product-preview {
+        padding: 20px 16px;
+    }
+
+    .landing-features,
+    .how-it-works {
+        margin-top: 64px;
+        padding-top: 32px;
+    }
+
+    .landing-section-heading {
+        margin-bottom: 20px;
+    }
+
+    .how-steps {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .landing-footer {
+        margin: 0 16px;
+    }
+
+    .landing-nav-secondary {
+        display: none;
+    }
+
+    .landing-actions {
+        gap: 16px;
+    }
+
+    .landing-note {
+        max-width: 300px;
+        line-height: 1.7;
+    }
+
+    .preview-task {
+        gap: 9px;
+    }
+
+    .preview-due {
+        padding: 4px 6px;
+        font-size: 8px;
+    }
+
+    .landing-footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    #dashboard-view .navbar {
+        background: transparent;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
     #dashboard-view .navbar {
         padding: calc(12px + env(safe-area-inset-top)) 16px 12px;
     }
@@ -2593,9 +2586,7 @@ textarea,
     #dashboard-view .search-box input {
         width: 100%;
     }
-}
 
-@media (max-width: 560px) {
     #dashboard-view .dashboard-main {
         margin-top: 28px;
         margin-bottom: 60px;
@@ -2673,6 +2664,16 @@ textarea,
 
     #dashboard-view .due-date {
         font-size: 17px;
+    }
+
+    [data-theme="dark"] #dashboard-view .navbar {
+        background: transparent;
+    }
+
+    input:not([type="hidden"]):focus,
+    textarea:focus,
+    select:focus {
+        font-size: 16px !important;
     }
 }
 
