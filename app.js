@@ -141,7 +141,7 @@ function openSettings() {
     settingsMessage.textContent = '';
     themePreferenceSelect.value = window.deadlineTheme.getPreference();
     settingsModal.classList.add('open');
-    themePreferenceSelect.focus();
+    closeSettingsBtn.focus();
 }
 
 function closeSettings() {
