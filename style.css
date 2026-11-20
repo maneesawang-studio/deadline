@@ -694,8 +694,10 @@ body {
 .task-list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 0;
     overflow: visible;
+    background: var(--bg-main);
+    border-radius: 28px;
 }
 
 .task-card {
@@ -704,9 +706,9 @@ body {
     grid-template-areas: "due info actions";
     align-items: center;
     gap: 16px;
-    background: var(--bg-main);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
     padding: 18px;
     min-height: 124px;
     position: relative;
@@ -714,20 +716,26 @@ body {
 }
 
 .task-card:not(:last-child)::after {
-    display: none;
+    content: "";
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    left: 122px;
+    height: 1px;
+    background: var(--border-color);
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 .task-card:hover {
     background-color: var(--bg-hover);
-    border-color: var(--border-hover);
-    transform: translateY(-1px);
 }
 
 .task-card.menu-open {
     z-index: 2;
 }
 
-.task-card.completed {
+.task-card.completed .task-info {
     opacity: 0.78;
 }
 
@@ -832,7 +840,7 @@ body {
     align-items: flex-start;
     justify-content: flex-end;
     position: relative;
-    align-self: start;
+    align-self: center;
 }
 
 .action-btn {
@@ -878,14 +886,14 @@ body {
 }
 
 .task-menu-toggle {
-    background: var(--bg-muted);
+    background: transparent;
     color: var(--text-secondary);
 }
 
 .task-menu-toggle:hover,
 .task-menu-toggle[aria-expanded="true"] {
     color: var(--text-primary);
-    background: var(--bg-hover);
+    background: transparent;
 }
 
 .task-action-menu {
@@ -1674,29 +1682,7 @@ textarea,
 
     .dashboard-main {
         margin-top: 18px;
-        margin-bottom: calc(90px + env(safe-area-inset-bottom));
-    }
-
-    #open-modal-btn {
-        position: fixed;
-        right: 16px;
-        bottom: calc(16px + env(safe-area-inset-bottom));
-        z-index: 60;
-        width: 58px;
-        height: 58px;
-        min-height: 58px;
-        padding: 0;
-        border-radius: 50%;
-        font-size: 0;
-    }
-
-    #open-modal-btn > span:first-child {
-        font-size: 26px;
-        line-height: 1;
-    }
-
-    #open-modal-btn .btn-label {
-        display: none;
+        margin-bottom: 60px;
     }
 
     .stats-header {
@@ -2410,6 +2396,7 @@ textarea,
 }
 
 #dashboard-view #open-modal-btn {
+    justify-self: end;
     min-height: 44px;
     padding: 0 18px;
     border-radius: var(--radius-full);
@@ -2484,9 +2471,10 @@ textarea,
 }
 
 #dashboard-view .task-list {
-    gap: 12px;
+    gap: 0;
     overflow: visible;
-    background: transparent;
+    background: var(--bg-main);
+    border-radius: 28px;
 }
 
 #dashboard-view .task-card {
@@ -2494,17 +2482,33 @@ textarea,
     gap: 16px;
     min-height: 124px;
     padding: 18px;
-    background: var(--bg-main);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
 }
 
 #dashboard-view .task-card:not(:last-child)::after {
-    display: none;
+    display: block;
+    right: 20px;
+    left: 122px;
+    background: var(--border-color);
+    opacity: 0.5;
 }
 
 #dashboard-view .task-card:hover {
     background: var(--bg-hover);
+}
+
+#dashboard-view .task-card:first-child:hover {
+    border-radius: 28px 28px 0 0;
+}
+
+#dashboard-view .task-card:last-child:hover {
+    border-radius: 0 0 28px 28px;
+}
+
+#dashboard-view .task-card:only-child:hover {
+    border-radius: 28px;
 }
 
 #dashboard-view .due-badge-box {
@@ -2594,7 +2598,7 @@ textarea,
 @media (max-width: 560px) {
     #dashboard-view .dashboard-main {
         margin-top: 28px;
-        margin-bottom: calc(90px + env(safe-area-inset-bottom));
+        margin-bottom: 60px;
     }
 
     .dashboard-intro {
@@ -2606,36 +2610,42 @@ textarea,
     }
 
     #dashboard-view .stats-header {
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px;
         margin-bottom: 24px;
     }
 
     #dashboard-view .stats-group {
-        width: 100%;
-        gap: 8px;
+        width: auto;
+        min-width: 0;
+        gap: 6px;
     }
 
     #dashboard-view .stat-item {
-        min-height: 44px;
-        gap: 8px;
-        padding: 10px 12px;
+        min-width: 0;
+        min-height: 48px;
+        max-height: 48px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        padding: 4px 6px;
         border-radius: var(--radius-full);
     }
 
     #dashboard-view .stat-label {
-        font-size: 11px;
+        font-size: 9px;
+        line-height: 1.2;
+        white-space: nowrap;
     }
 
     #dashboard-view .stat-value {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     #dashboard-view #open-modal-btn {
-        width: 58px;
-        height: 58px;
-        min-height: 58px;
-        padding: 0;
-        border-radius: 50%;
+        padding: 0 10px;
+        font-size: 12px;
     }
 
     #dashboard-view .search-sort {
@@ -2651,7 +2661,9 @@ textarea,
     }
 
     #dashboard-view .task-card:not(:last-child)::after {
-        display: none;
+        display: block;
+        right: 12px;
+        left: 98px;
     }
 
     #dashboard-view .due-badge-box {
