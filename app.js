@@ -23,6 +23,19 @@ let unsubscribeTasks = null;
 let currentUser = null;
 
 const userAvatar = document.getElementById('user-avatar');
+const accountMenuButton = document.getElementById('account-menu-btn');
+const accountMenu = document.getElementById('account-menu');
+const accountMenuWrap = document.querySelector('.account-menu-wrap');
+const accountTriggerEmail = document.getElementById('account-trigger-email');
+const accountEmail = document.getElementById('account-email');
+const openSettingsBtn = document.getElementById('open-settings-btn');
+const accountThemeToggle = document.getElementById('account-theme-toggle');
+const signOutBtn = document.getElementById('sign-out-btn');
+const settingsModal = document.getElementById('settings-modal');
+const themePreferenceSelect = document.getElementById('theme-preference');
+const settingsMessage = document.getElementById('settings-message');
+const closeSettingsBtn = document.getElementById('close-settings-btn');
+const doneSettingsBtn = document.getElementById('done-settings-btn');
 const taskListEl = document.getElementById('task-list');
 const activeCountEl = document.getElementById('active-count');
 const completedCountEl = document.getElementById('completed-count');
@@ -100,7 +113,10 @@ function handleAuthState(user) {
         return;
     }
 
-    userAvatar.textContent = (user.email || 'U').charAt(0).toUpperCase();
+    const email = user.email || 'บัญชีผู้ใช้';
+    userAvatar.textContent = email.charAt(0).toUpperCase();
+    accountTriggerEmail.textContent = email;
+    accountEmail.textContent = email;
     setDashboardMessage('กำลังโหลดรายการงาน...');
     renderTasks();
 
@@ -114,7 +130,60 @@ function handleAuthState(user) {
     });
 }
 
-userAvatar.addEventListener('click', async () => {
+function closeAccountMenu(restoreFocus = false) {
+    accountMenu.hidden = true;
+    accountMenuButton.setAttribute('aria-expanded', 'false');
+    if (restoreFocus) accountMenuButton.focus();
+}
+
+function openSettings() {
+    closeAccountMenu();
+    settingsMessage.textContent = '';
+    themePreferenceSelect.value = window.deadlineTheme.getPreference();
+    settingsModal.classList.add('open');
+    themePreferenceSelect.focus();
+}
+
+function closeSettings() {
+    settingsModal.classList.remove('open');
+    accountMenuButton.focus();
+}
+
+accountMenuButton.addEventListener('click', () => {
+    const isOpening = accountMenu.hidden;
+    accountMenu.hidden = !isOpening;
+    accountMenuButton.setAttribute('aria-expanded', String(isOpening));
+    if (isOpening) accountMenu.querySelector('.account-menu-item').focus();
+});
+
+document.addEventListener('click', event => {
+    if (!accountMenuWrap.contains(event.target)) closeAccountMenu();
+});
+
+accountMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => closeAccountMenu());
+});
+
+openSettingsBtn.addEventListener('click', openSettings);
+accountThemeToggle.addEventListener('click', () => closeAccountMenu(true));
+closeSettingsBtn.addEventListener('click', closeSettings);
+doneSettingsBtn.addEventListener('click', closeSettings);
+settingsModal.addEventListener('click', event => {
+    if (event.target === settingsModal) closeSettings();
+});
+
+themePreferenceSelect.addEventListener('change', () => {
+    try {
+        window.deadlineTheme.setPreference(themePreferenceSelect.value);
+        settingsMessage.textContent = '';
+    } catch (error) {
+        settingsMessage.textContent = 'เปลี่ยนธีมแล้ว แต่บันทึกการตั้งค่าไม่สำเร็จ การตั้งค่าอาจไม่คงอยู่เมื่อเปิดใหม่';
+        console.error('Could not persist the theme preference.', error);
+    }
+});
+
+signOutBtn.addEventListener('click', async () => {
+    closeAccountMenu();
     if (!auth || !currentUser || !confirm('ต้องการออกจากระบบใช่หรือไม่?')) return;
     try {
         await signOut(auth);
@@ -249,8 +318,8 @@ function renderTasks() {
     taskListEl.replaceChildren();
     if (filtered.length === 0) {
         const message = tasks.length === 0
-            ? 'ยังไม่มีงาน กด “เพิ่มกำหนดการ” เพื่อเริ่มต้น'
-            : 'ไม่พบงานที่ตรงกับการค้นหา';
+            ? 'ยังไม่มีกำหนดการ กด “เพิ่มกำหนดการ” เพื่อเริ่มต้น'
+            : 'ไม่พบกำหนดการที่ตรงกับการค้นหา';
         taskListEl.appendChild(createElement('p', 'empty-state', message));
         return;
     }
@@ -330,7 +399,14 @@ taskModal.addEventListener('click', event => {
     if (event.target === taskModal) closeModal();
 });
 document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && taskModal.classList.contains('open')) closeModal();
+    if (event.key !== 'Escape') return;
+    if (settingsModal.classList.contains('open')) {
+        closeSettings();
+    } else if (!accountMenu.hidden) {
+        closeAccountMenu(true);
+    } else if (taskModal.classList.contains('open')) {
+        closeModal();
+    }
 });
 
 taskForm.addEventListener('submit', async event => {

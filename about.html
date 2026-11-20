@@ -21,7 +21,7 @@
                     <span class="logo-text">Deadline.</span>
                 </a>
                 <nav class="nav-links">
-                    <a href="./login.html" class="nav-link">เข้าสู่ระบบ</a>
+                    <a id="about-auth-link" href="./login.html" class="nav-link">เข้าสู่ระบบ</a>
                     <a href="./about.html" class="nav-link active" aria-current="page">เกี่ยวกับเว็บไซต์</a>
                 </nav>
                 <button id="theme-toggle" class="theme-toggle" type="button" aria-label="สลับเป็นโหมดมืด" title="สลับเป็นโหมดมืด">
@@ -37,14 +37,14 @@
         </header>
 
         <main class="about-main">
-            <section class="about-hero">
+            <section id="about" class="about-hero">
                 <p class="eyebrow">เกี่ยวกับ Deadline</p>
                 <h1 class="hero-title">จัดการงานสำคัญ<br>ให้ทันเวลาของคุณ</h1>
                 <p class="hero-subtitle">Deadline ช่วยรวบรวมงาน วันเริ่มต้น และวันครบกำหนดไว้ในที่เดียว เพื่อให้คุณวางแผนและติดตามสิ่งที่ต้องทำได้ง่ายขึ้น</p>
-                <a class="btn-primary" href="./login.html">เริ่มจัดการงาน <span aria-hidden="true">→</span></a>
+                <a id="about-cta" class="btn-primary" href="./login.html">เริ่มจัดการงาน <span aria-hidden="true">→</span></a>
             </section>
 
-            <section class="about-grid" aria-label="ความสามารถของเว็บไซต์">
+            <section id="features" class="about-grid" aria-label="ความสามารถของเว็บไซต์">
                 <article class="about-card">
                     <span class="about-card-number">01</span>
                     <h2>เห็นกำหนดส่งชัดเจน</h2>
@@ -62,11 +62,33 @@
                 </article>
             </section>
 
-            <section class="about-note">
+            <section id="privacy" class="about-note">
                 <h2>ข้อมูลและความเป็นส่วนตัว</h2>
                 <p>รายการงานผูกกับบัญชีผู้ใช้และจำกัดการเข้าถึงด้วย Firestore Security Rules โปรดใช้รหัสผ่านที่คาดเดายาก และตรวจสอบการตั้งค่า Firebase ก่อนเปิดให้ใช้งานจริง</p>
             </section>
+
+            <section id="faq" class="faq-section" aria-labelledby="faq-title">
+                <p class="eyebrow">HELP &amp; INFORMATION</p>
+                <h2 id="faq-title">คำถามที่พบบ่อย</h2>
+                <details class="faq-item">
+                    <summary>เริ่มเพิ่มกำหนดการได้อย่างไร?</summary>
+                    <p>เลือก “เพิ่มกำหนดการ” บนหน้าหลัก ระบุชื่องาน วันเริ่มต้น และกำหนดส่ง แล้วกดบันทึก</p>
+                </details>
+                <details class="faq-item">
+                    <summary>รายการงานของฉันบันทึกไว้ที่ไหน?</summary>
+                    <p>รายการงานจะจัดเก็บในบัญชี Firebase ที่คุณเข้าสู่ระบบ และซิงก์ผ่านบัญชีเดียวกันบนอุปกรณ์อื่น</p>
+                </details>
+                <details class="faq-item">
+                    <summary>แก้ไขหรือลบกำหนดการได้หรือไม่?</summary>
+                    <p>ได้ เลือกปุ่มแก้ไขหรือลบจากรายการงานบนหน้าหลัก การลบจะนำรายการนั้นออกจากบัญชีของคุณ</p>
+                </details>
+                <details class="faq-item">
+                    <summary>หากพบปัญหาเกี่ยวกับบัญชีหรือข้อมูลควรทำอย่างไร?</summary>
+                    <p>ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตและลองเข้าสู่ระบบอีกครั้ง หากยังพบปัญหา โปรดติดต่อผู้ดูแลเว็บไซต์</p>
+                </details>
+            </section>
         </main>
     </div>
+    <script type="module" src="about.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 # Deadline
 
-Deadline is a static Thai task planner. `index.html` is the authenticated task dashboard, `login.html` handles sign-in and registration, and `about.html` describes the service. Firebase Authentication provides email/password accounts, and Cloud Firestore stores each user's tasks in a UID-scoped collection. The site can be hosted on GitHub Pages; Firebase remains the backend.
+Deadline is a static Thai task planner. `index.html` is the authenticated task dashboard, `login.html` handles sign-in and registration, and `about.html` describes the service and adapts its navigation links to the current Firebase Authentication state. Firebase Authentication provides email/password accounts, and Cloud Firestore stores each user's tasks in a UID-scoped collection. The site can be hosted on GitHub Pages; Firebase remains the backend.
 
 ## Set up Firebase
 
@@ -23,4 +23,4 @@ Run a local HTTP server from the project directory (for example, `python -m http
 
 ## Current scope
 
-The app supports email/password registration and sign-in, task create/edit/delete, completion, search, filtering, sorting, live sync for the signed-in user, and a light/dark theme that follows the system setting by default and saves manual choices across pages. Password reset, email verification, and account deletion are not implemented. Firebase billing, quotas, authorized domains, and production rules should be reviewed before launch.
+The app supports email/password registration and sign-in, task create/edit/delete, completion, search, filtering, sorting, and live sync for the signed-in user. The dashboard account menu contains theme controls, settings, About, FAQ, privacy information, and sign-out. Theme can follow the system setting or be selected manually and is shared across pages. The language setting is prepared for future localization; Thai is currently the only available language. Password reset, email verification, and account deletion are not implemented. Firebase billing, quotas, authorized domains, and production rules should be reviewed before launch.

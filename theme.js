@@ -1,4 +1,6 @@
 const themeToggle = document.getElementById('theme-toggle');
+const accountThemeToggle = document.getElementById('account-theme-toggle');
+const accountThemeLabel = document.getElementById('account-theme-label');
 const colorScheme = window.matchMedia('(prefers-color-scheme: dark)');
 let savedTheme = null;
 
@@ -13,31 +15,65 @@ try {
 
 function applyTheme(theme) {
     document.documentElement.dataset.theme = theme;
-    themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
 
     const label = theme === 'dark' ? 'สลับเป็นโหมดสว่าง' : 'สลับเป็นโหมดมืด';
-    themeToggle.setAttribute('aria-label', label);
-    themeToggle.title = label;
+    if (themeToggle) {
+        themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
+        themeToggle.setAttribute('aria-label', label);
+        themeToggle.title = label;
+    }
+    if (accountThemeToggle) {
+        accountThemeToggle.setAttribute('aria-label', label);
+        accountThemeToggle.title = label;
+        accountThemeLabel.textContent = theme === 'dark' ? 'มืด' : 'สว่าง';
+    }
 
     const themeColor = document.querySelector('meta[name="theme-color"]');
     if (themeColor) {
-        themeColor.content = theme === 'dark' ? '#111111' : '#ffffff';
+        themeColor.content = theme === 'dark' ? '#111213' : '#ffffff';
     }
 }
 
 applyTheme(savedTheme || (colorScheme.matches ? 'dark' : 'light'));
 
-themeToggle.addEventListener('click', () => {
-    const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-    savedTheme = nextTheme;
-    applyTheme(nextTheme);
+function setThemePreference(preference) {
+    if (!['system', 'light', 'dark'].includes(preference)) {
+        throw new RangeError('Unsupported theme preference.');
+    }
 
+    let storageError;
     try {
-        localStorage.setItem('deadline_theme', nextTheme);
+        if (preference === 'system') {
+            localStorage.removeItem('deadline_theme');
+        } else {
+            localStorage.setItem('deadline_theme', preference);
+        }
     } catch (error) {
+        storageError = error;
         console.warn('Could not save the theme preference.', error);
     }
-});
+
+    savedTheme = preference === 'system' ? null : preference;
+    applyTheme(savedTheme || (colorScheme.matches ? 'dark' : 'light'));
+    if (storageError) throw storageError;
+}
+
+window.deadlineTheme = {
+    getPreference: () => savedTheme || 'system',
+    setPreference: setThemePreference
+};
+
+function toggleTheme() {
+    const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    try {
+        setThemePreference(nextTheme);
+    } catch (error) {
+        console.error('The theme changed, but its preference could not be saved.', error);
+    }
+}
+
+if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+if (accountThemeToggle) accountThemeToggle.addEventListener('click', toggleTheme);
 
 colorScheme.addEventListener('change', event => {
     if (!savedTheme) {

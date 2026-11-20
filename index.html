@@ -22,20 +22,42 @@
                     <img src="assets/Deadline.png" alt="Deadline." class="logo-img">
                     <h1 class="logo-text">Deadline.</h1>
                 </a>
-                <nav class="nav-links">
-                    <a href="./about.html" class="nav-link">เกี่ยวกับเว็บไซต์</a>
-                </nav>
                 <div class="header-actions">
-                    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="สลับเป็นโหมดมืด" title="สลับเป็นโหมดมืด">
-                        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                            <path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.6 8.6 0 1 0 20.2 15.1Z"></path>
-                        </svg>
-                        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                            <circle cx="12" cy="12" r="4"></circle>
-                            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
-                        </svg>
-                    </button>
-                    <button id="user-avatar" class="avatar-btn" title="ออกจากระบบ" aria-label="ออกจากระบบ">P</button>
+                    <div class="account-menu-wrap">
+                        <button id="account-menu-btn" class="account-trigger" type="button" aria-label="เปิดเมนูบัญชี" aria-expanded="false" aria-controls="account-menu">
+                            <span id="user-avatar" class="avatar-btn" aria-hidden="true">U</span>
+                            <span id="account-trigger-email" class="account-trigger-email"></span>
+                            <svg class="account-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
+                        <div id="account-menu" class="account-menu" hidden>
+                            <div class="account-menu-summary">
+                                <span class="account-menu-caption">บัญชีที่เข้าสู่ระบบ</span>
+                                <span id="account-email" class="account-menu-email"></span>
+                            </div>
+                            <button id="account-theme-toggle" class="account-menu-item" type="button">
+                                <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                    <path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.6 8.6 0 1 0 20.2 15.1Z"></path>
+                                </svg>
+                                <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="4"></circle>
+                                    <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42 1.42"></path>
+                                </svg>
+                                <span>สลับธีม</span>
+                                <span id="account-theme-label" class="account-menu-trailing"></span>
+                            </button>
+                            <button id="open-settings-btn" class="account-menu-item" type="button">
+                                <span>การตั้งค่า</span>
+                            </button>
+                            <div class="account-menu-divider"></div>
+                            <a class="account-menu-item" href="./about.html#about">เกี่ยวกับ Deadline</a>
+                            <a class="account-menu-item" href="./about.html#faq">คำถามที่พบบ่อย</a>
+                            <a class="account-menu-item" href="./about.html#privacy">ความเป็นส่วนตัว</a>
+                            <div class="account-menu-divider"></div>
+                            <button id="sign-out-btn" class="account-menu-item account-menu-signout" type="button">ออกจากระบบ</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
@@ -126,6 +148,39 @@
                 </div>
             </form>
         </div>
+    </div>
+
+    <div id="settings-modal" class="modal-overlay">
+        <section class="modal-card settings-card" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+            <div class="modal-header">
+                <div>
+                    <p class="card-tag">PREFERENCES</p>
+                    <h2 id="settings-title">การตั้งค่า</h2>
+                </div>
+                <button id="close-settings-btn" class="icon-btn" type="button" aria-label="ปิดการตั้งค่า">✕</button>
+            </div>
+            <div class="settings-section">
+                <label for="theme-preference">ธีม</label>
+                <select id="theme-preference">
+                    <option value="system">ตามอุปกรณ์</option>
+                    <option value="light">สว่าง</option>
+                    <option value="dark">มืด</option>
+                </select>
+                <p>เลือกธีมที่ต้องการ หรือให้ Deadline ใช้การตั้งค่าของอุปกรณ์</p>
+            </div>
+            <div class="settings-section">
+                <label for="language-preference">ภาษา</label>
+                <select id="language-preference" disabled>
+                    <option value="th">ไทย</option>
+                    <option value="en" disabled>English — เร็วๆ นี้</option>
+                </select>
+                <p>เตรียมรองรับภาษาเพิ่มเติมในอนาคต</p>
+            </div>
+            <p id="settings-message" class="form-message" role="status" aria-live="polite"></p>
+            <div class="modal-actions">
+                <button id="done-settings-btn" class="btn-primary" type="button">เสร็จสิ้น</button>
+            </div>
+        </section>
     </div>
 
     <script type="module" src="app.js"></script>
