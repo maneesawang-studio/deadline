@@ -8,17 +8,17 @@ const configIsReady = ['apiKey', 'authDomain', 'projectId', 'appId']
     .every(key => typeof firebaseConfig[key] === 'string' && firebaseConfig[key].trim());
 
 function updateAuthLinks(user) {
-    authLink.href = user ? './index.html' : './login.html';
+    authLink.href = user ? './app.html' : './login.html';
     authLink.textContent = user ? 'ไปที่งาน' : 'เข้าสู่ระบบ';
-    callToAction.href = user ? './index.html' : './login.html';
+    callToAction.href = user ? './app.html' : './login.html';
     callToAction.firstChild.textContent = user ? 'เปิดงานของฉัน ' : 'เริ่มจัดการงาน ';
 }
 
 if (configIsReady) {
     const auth = getAuth(initializeApp(firebaseConfig));
     onAuthStateChanged(auth, updateAuthLinks, error => {
-        console.error('Could not read the authentication state on the about page.', error);
+        console.error('Could not read the authentication state on the public page.', error);
     });
 } else {
-    console.error('Firebase configuration is incomplete; about page authentication links are unavailable.');
+    console.error('Firebase configuration is incomplete; public page authentication links are unavailable.');
 }

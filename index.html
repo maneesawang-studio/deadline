@@ -3,186 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deadline.</title>
-    <!-- นำเข้า Font Inter และ Noto Sans Thai -->
     <meta name="theme-color" content="#ffffff">
-    <meta name="description" content="จัดการกำหนดส่งงานสำคัญ ติดตามความคืบหน้า และซิงก์ข้อมูลของคุณ">
+    <meta name="description" content="วางแผนงานและจัดการกำหนดส่งได้ง่ายด้วย Deadline เว็บจัดการงานภาษาไทยที่ช่วยติดตามวันครบกำหนด ค้นหางาน และซิงก์ข้อมูลทุกอุปกรณ์">
+    <title>Deadline | จัดการงานและกำหนดส่งให้ทันเวลา</title>
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="th_TH">
+    <meta property="og:site_name" content="Deadline">
+    <meta property="og:title" content="Deadline | จัดการงานและกำหนดส่งให้ทันเวลา">
+    <meta property="og:description" content="ดูตัวอย่างวิธีวางแผนงาน ติดตามวันครบกำหนด และจัดการงานสำคัญได้ในที่เดียว">
+    <meta property="og:url" content="https://maneesawang-studio.github.io/deadline/">
+    <meta property="og:image" content="https://maneesawang-studio.github.io/deadline/assets/Deadline.png">
+    <meta property="og:image:alt" content="โลโก้ Deadline">
+    <meta property="og:image:width" content="1000">
+    <meta property="og:image:height" content="1000">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Deadline | จัดการงานและกำหนดส่งให้ทันเวลา">
+    <meta name="twitter:description" content="ดูตัวอย่างวิธีวางแผนงาน ติดตามวันครบกำหนด และจัดการงานสำคัญได้ในที่เดียว">
+    <meta name="twitter:image" content="https://maneesawang-studio.github.io/deadline/assets/Deadline.png">
+    <meta name="apple-mobile-web-app-title" content="Deadline">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="canonical" href="https://maneesawang-studio.github.io/deadline/">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/Deadline-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/Deadline-180.png">
+    <link rel="manifest" href="site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="theme.js" defer></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Deadline",
+      "url": "https://maneesawang-studio.github.io/deadline/",
+      "description": "เว็บจัดการงานภาษาไทยสำหรับวางแผนวันเริ่มต้น ติดตามกำหนดส่ง ค้นหาและจัดหมวดหมู่งาน",
+      "applicationCategory": "ProductivityApplication",
+      "operatingSystem": "Any",
+      "inLanguage": "th",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "THB"
+      },
+      "image": "https://maneesawang-studio.github.io/deadline/assets/Deadline.png"
+    }
+    </script>
 </head>
 <body>
-
-    <div id="dashboard-view" class="view active">
+    <div class="view active">
         <header class="navbar">
             <div class="nav-container">
-                <a href="./index.html" class="logo">
-                    <img src="assets/Deadline.png" alt="Deadline." class="logo-img">
-                    <h1 class="logo-text">Deadline.</h1>
+                <a href="./index.html" class="logo" aria-label="Deadline หน้าหลัก">
+                    <img src="assets/Deadline.png" alt="" class="logo-img">
+                    <span class="logo-text">Deadline</span>
                 </a>
-                <div class="header-actions">
-                    <div class="account-menu-wrap">
-                        <button id="account-menu-btn" class="account-trigger" type="button" aria-label="เปิดเมนูบัญชี" aria-expanded="false" aria-controls="account-menu">
-                            <span id="user-avatar" class="avatar-btn" aria-hidden="true">U</span>
-                            <span id="account-trigger-email" class="account-trigger-email"></span>
-                            <svg class="account-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                                <path d="m6 9 6 6 6-6"></path>
-                            </svg>
-                        </button>
-                        <div id="account-menu" class="account-menu" hidden>
-                            <div class="account-menu-summary">
-                                <span class="account-menu-caption">บัญชีที่เข้าสู่ระบบ</span>
-                                <span id="account-email" class="account-menu-email"></span>
-                            </div>
-                            <button id="account-theme-toggle" class="account-menu-item" type="button">
-                                <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                                    <path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.6 8.6 0 1 0 20.2 15.1Z"></path>
-                                </svg>
-                                <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                                    <circle cx="12" cy="12" r="4"></circle>
-                                    <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42 1.42"></path>
-                                </svg>
-                                <span>สลับธีม</span>
-                                <span id="account-theme-label" class="account-menu-trailing"></span>
-                            </button>
-                            <button id="open-settings-btn" class="account-menu-item" type="button">
-                                <span>การตั้งค่า</span>
-                            </button>
-                            <div class="account-menu-divider"></div>
-                            <a class="account-menu-item" href="./about.html#about">เกี่ยวกับ Deadline</a>
-                            <a class="account-menu-item" href="./about.html#faq">คำถามที่พบบ่อย</a>
-                            <a class="account-menu-item" href="./about.html#privacy">ความเป็นส่วนตัว</a>
-                            <div class="account-menu-divider"></div>
-                            <button id="sign-out-btn" class="account-menu-item account-menu-signout" type="button">ออกจากระบบ</button>
-                        </div>
-                    </div>
-                </div>
+                <nav class="nav-links" aria-label="เมนูหลัก">
+                    <a href="#how-it-works" class="nav-link landing-nav-secondary">วิธีใช้งาน</a>
+                    <a href="./about.html" class="nav-link landing-nav-secondary">เกี่ยวกับ</a>
+                    <a id="about-auth-link" href="./login.html" class="nav-link">เข้าสู่ระบบ</a>
+                </nav>
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="สลับเป็นโหมดมืด" title="สลับเป็นโหมดมืด">
+                    <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.6 8.6 0 1 0 20.2 15.1Z"></path>
+                    </svg>
+                    <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l-1.42 1.42m11.3-11.3 1.42-1.42"></path>
+                    </svg>
+                </button>
             </div>
         </header>
 
-        <main class="dashboard-main">
-            <!-- แถบสถิติและปุ่มเพิ่มงาน -->
-            <div class="stats-header">
-                <div class="stats-group">
-                    <div class="stat-item">
-                        <span class="stat-label">ดำเนินการอยู่</span>
-                        <span id="active-count" class="stat-value">3</span>
+        <main class="landing-main">
+            <section class="landing-hero">
+                <div class="landing-copy">
+                    <p class="eyebrow">วางแผนงานให้เห็นภาพ จัดการเวลาให้ทัน</p>
+                    <h1 class="hero-title">ทุกกำหนดส่ง<br>ชัดเจนในที่เดียว</h1>
+                    <p class="hero-subtitle">Deadline ช่วยรวบรวมงาน วันเริ่มต้น และวันครบกำหนด ให้คุณรู้ว่างานไหนต้องทำต่อและเหลือเวลาอีกเท่าไร</p>
+                    <div class="landing-actions">
+                        <a id="about-cta" class="btn-primary" href="./login.html">เริ่มจัดการงาน <span aria-hidden="true">→</span></a>
+                        <a class="landing-secondary-link" href="#how-it-works">ดูวิธีใช้งาน</a>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-label">เสร็จสิ้น</span>
-                        <span id="completed-count" class="stat-value">0</span>
-                    </div>
-                </div>
-                <button id="open-modal-btn" class="btn-primary btn-pill">
-                    <span>+</span> เพิ่มกำหนดการ
-                </button>
-            </div>
-
-            <!-- แถบตัวกรองและค้นหา -->
-            <div class="controls-bar">
-                <div class="tabs">
-                    <button class="tab-btn active" data-filter="all" aria-pressed="true">ทั้งหมด</button>
-                    <button class="tab-btn" data-filter="active" aria-pressed="false">ดำเนินการอยู่</button>
-                    <button class="tab-btn" data-filter="completed" aria-pressed="false">เสร็จสิ้น</button>
+                    <p class="landing-note">เริ่มใช้งานได้ฟรี · รายการงานส่วนตัวจะเห็นได้เมื่อเข้าสู่ระบบ</p>
                 </div>
 
-                <div class="search-sort">
-                    <div class="search-box">
-                        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                        <input type="search" id="search-input" placeholder="ค้นหางาน" aria-label="ค้นหางาน">
+                <section class="product-preview" aria-label="ตัวอย่างหน้ารายการงานใน Deadline">
+                    <div class="preview-topbar">
+                        <div>
+                            <span class="preview-overline">MY WORKSPACE</span>
+                            <h2>รายการงานของฉัน</h2>
+                        </div>
+                        <span class="preview-add" aria-hidden="true">+</span>
                     </div>
+                    <div class="preview-summary">
+                        <div><span>กำลังทำ</span><strong>3 งาน</strong></div>
+                        <div><span>เสร็จแล้ว</span><strong>2 งาน</strong></div>
+                    </div>
+                    <div class="preview-filters" aria-hidden="true">
+                        <span class="selected">ทั้งหมด</span><span>กำลังทำ</span><span>เสร็จแล้ว</span>
+                    </div>
+                    <ul class="preview-task-list">
+                        <li class="preview-task">
+                            <span class="preview-date"><strong>12</strong><small>ธ.ค.</small></span>
+                            <span class="preview-task-info"><strong>ส่งรายงานประจำเดือน</strong><small>เริ่ม 5 ธ.ค. · งาน</small></span>
+                            <span class="preview-due">อีก 2 วัน</span>
+                        </li>
+                        <li class="preview-task">
+                            <span class="preview-date"><strong>18</strong><small>ธ.ค.</small></span>
+                            <span class="preview-task-info"><strong>เตรียมสไลด์นำเสนอ</strong><small>เริ่ม 10 ธ.ค. · โปรเจกต์</small></span>
+                            <span class="preview-due">อีก 8 วัน</span>
+                        </li>
+                        <li class="preview-task">
+                            <span class="preview-date"><strong>25</strong><small>ธ.ค.</small></span>
+                            <span class="preview-task-info"><strong>วางแผนงานสัปดาห์หน้า</strong><small>เริ่ม 20 ธ.ค. · ส่วนตัว</small></span>
+                            <span class="preview-due">อีก 15 วัน</span>
+                        </li>
+                    </ul>
+                    <p class="preview-caption">ตัวอย่างหน้าจอ · วันที่และรายการเป็นข้อมูลประกอบ</p>
+                </section>
+            </section>
 
-                    <div class="sort-box">
-                        <select id="sort-select" aria-label="เรียงรายการ">
-                            <option value="due-asc">กำหนดส่งใกล้สุด</option>
-                            <option value="due-desc">กำหนดส่งไกลสุด</option>
-                        </select>
-                    </div>
+            <section class="landing-features" aria-labelledby="features-title">
+                <div class="landing-section-heading">
+                    <p class="eyebrow">จัดระเบียบงานได้แบบไม่ซับซ้อน</p>
+                    <h2 id="features-title">เห็นสิ่งที่ต้องทำ และสิ่งที่ต้องทำต่อ</h2>
                 </div>
-            </div>
+                <div class="about-grid">
+                    <article class="about-card">
+                        <span class="about-card-number">01</span>
+                        <h3>เห็นกำหนดส่งชัดเจน</h3>
+                        <p>ดูวันครบกำหนดและเวลาที่เหลือ ช่วยจัดลำดับงานที่ควรเริ่มก่อน</p>
+                    </article>
+                    <article class="about-card">
+                        <span class="about-card-number">02</span>
+                        <h3>ค้นหาและแยกหมวดหมู่</h3>
+                        <p>ใส่แท็ก ค้นหางาน และกรองรายการตามสถานะ ทั้งหมดได้จากหน้ารายการเดียว</p>
+                    </article>
+                    <article class="about-card">
+                        <span class="about-card-number">03</span>
+                        <h3>ซิงก์งานข้ามอุปกรณ์</h3>
+                        <p>เข้าสู่ระบบบัญชีเดิมเพื่อดูรายการงานที่บันทึกไว้จากอุปกรณ์อื่น</p>
+                    </article>
+                </div>
+            </section>
 
-            <!-- รายการการ์ดงาน -->
-            <p id="dashboard-message" class="form-message dashboard-message" role="status" aria-live="polite"></p>
-            <div id="task-list" class="task-list" aria-live="polite">
-                <!-- การ์ดงานจะถูกเรนเดอร์ผ่าน app.js -->
-            </div>
+            <section id="how-it-works" class="how-it-works" aria-labelledby="how-title">
+                <div class="landing-section-heading">
+                    <p class="eyebrow">เริ่มต้นได้ในไม่กี่ขั้นตอน</p>
+                    <h2 id="how-title">Deadline ทำงานอย่างไร</h2>
+                </div>
+                <ol class="how-steps">
+                    <li><span>1</span><div><h3>สร้างบัญชีหรือเข้าสู่ระบบ</h3><p>ใช้บัญชีของคุณเพื่อบันทึกและซิงก์รายการงานอย่างปลอดภัย</p></div></li>
+                    <li><span>2</span><div><h3>เพิ่มงานและกำหนดวัน</h3><p>ใส่ชื่องาน วันเริ่มต้น วันครบกำหนด และหมวดหมู่ที่ต้องการ</p></div></li>
+                    <li><span>3</span><div><h3>ติดตามและอัปเดตสถานะ</h3><p>ค้นหา กรอง เรียงตามกำหนดส่ง หรือทำเครื่องหมายเมื่อทำงานเสร็จ</p></div></li>
+                </ol>
+                <a class="btn-primary" href="./about.html#faq">ดูคำถามที่พบบ่อย <span aria-hidden="true">→</span></a>
+            </section>
         </main>
+        <footer class="landing-footer">
+            <a href="./about.html#privacy">ความเป็นส่วนตัว</a>
+            <span>Deadline · เว็บจัดการงานและกำหนดส่ง</span>
+        </footer>
     </div>
-
-    <!-- ================= MODAL: เพิ่ม / แก้ไขกำหนดการ ================= -->
-    <div id="task-modal" class="modal-overlay">
-        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-            <div class="modal-header">
-                <h3 id="modal-title">เพิ่มกำหนดการใหม่</h3>
-                <button id="close-modal-btn" class="icon-btn" type="button" aria-label="ปิด">✕</button>
-            </div>
-            <form id="task-form">
-                <input type="hidden" id="task-id">
-                <div class="form-group">
-                    <label for="task-title">ชื่องาน</label>
-                    <input type="text" id="task-title" maxlength="200" required placeholder="เช่น ส่งรายงานประจำเดือน">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="task-start">วันเริ่มต้น</label>
-                        <input type="date" id="task-start" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="task-due">กำหนดส่ง</label>
-                        <input type="date" id="task-due" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="task-tag">หมวดหมู่ (แท็ก)</label>
-                    <input type="text" id="task-tag" maxlength="40" placeholder="เช่น งาน" value="งาน">
-                </div>
-                <p id="task-message" class="form-message" role="alert" aria-live="polite"></p>
-                <div class="modal-actions">
-                    <button type="button" id="cancel-modal-btn" class="btn-secondary">ยกเลิก</button>
-                    <button type="submit" class="btn-primary">บันทึก</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="settings-modal" class="modal-overlay">
-        <section class="modal-card settings-card" role="dialog" aria-modal="true" aria-labelledby="settings-title">
-            <div class="modal-header">
-                <div>
-                    <p class="card-tag">PREFERENCES</p>
-                    <h2 id="settings-title">การตั้งค่า</h2>
-                </div>
-                <button id="close-settings-btn" class="icon-btn" type="button" aria-label="ปิดการตั้งค่า">✕</button>
-            </div>
-            <div class="settings-section">
-                <label for="theme-preference">ธีม</label>
-                <select id="theme-preference">
-                    <option value="system">ตามอุปกรณ์</option>
-                    <option value="light">สว่าง</option>
-                    <option value="dark">มืด</option>
-                </select>
-                <p>เลือกธีมที่ต้องการ หรือให้ Deadline ใช้การตั้งค่าของอุปกรณ์</p>
-            </div>
-            <div class="settings-section">
-                <label for="language-preference">ภาษา</label>
-                <select id="language-preference" disabled>
-                    <option value="th">ไทย</option>
-                    <option value="en" disabled>English — เร็วๆ นี้</option>
-                </select>
-                <p>เตรียมรองรับภาษาเพิ่มเติมในอนาคต</p>
-            </div>
-            <p id="settings-message" class="form-message" role="status" aria-live="polite"></p>
-            <div class="modal-actions">
-                <button id="done-settings-btn" class="btn-primary" type="button">เสร็จสิ้น</button>
-            </div>
-        </section>
-    </div>
-
-    <script type="module" src="app.js"></script>
+    <script type="module" src="about.js"></script>
 </body>
 </html>

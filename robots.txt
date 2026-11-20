@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://maneesawang-studio.github.io/deadline/sitemap.xml

@@ -40,7 +40,7 @@ function getErrorMessage(error) {
 if (configIsReady) {
     auth = getAuth(initializeApp(firebaseConfig));
     onAuthStateChanged(auth, user => {
-        if (user) window.location.replace('./index.html');
+        if (user) window.location.replace('./app.html');
     });
 } else {
     authSubmitBtn.disabled = true;
