@@ -300,7 +300,7 @@ body {
 
 .btn-primary {
     background-color: var(--accent-blue);
-    color: var(--accent-blue-text);
+    color: #fff;
     border: none;
     font-family: inherit;
     font-size: 13px;
@@ -818,7 +818,7 @@ body {
     grid-area: actions;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
 }
 
 .action-btn {
@@ -1554,13 +1554,13 @@ textarea,
     }
 
     .task-card {
-        grid-template-columns: 52px minmax(0, 1fr) auto;
+        grid-template-columns: 64px minmax(0, 1fr) auto;
         gap: 10px;
         padding: 10px 14px;
     }
 
     .task-card:not(:last-child)::after {
-        left: 76px;
+        left: 88px;
     }
 
     .task-info {
@@ -1568,12 +1568,12 @@ textarea,
     }
 
     .task-actions {
-        gap: 0;
+        gap: 8px;
     }
 
     .due-badge-box {
-        width: 52px;
-        height: 56px;
+        width: 64px;
+        height: 64px;
     }
 
     .task-meta {
@@ -1649,14 +1649,14 @@ textarea,
     }
 
     .task-card {
-        grid-template-columns: 52px minmax(0, 1fr) auto;
+        grid-template-columns: 64px minmax(0, 1fr) auto;
         grid-template-areas: "due info actions";
         gap: 8px;
         padding: 8px;
     }
 
     .task-card:not(:last-child)::after {
-        left: 68px;
+        left: 80px;
     }
 
     .due-badge-box {
@@ -1670,7 +1670,7 @@ textarea,
     }
 
     .task-actions {
-        gap: 0;
+        gap: 8px;
     }
 
     .modal-overlay {
