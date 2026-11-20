@@ -419,7 +419,7 @@ function resetTaskForm() {
     taskIdInput.value = '';
     deleteTaskBtn.hidden = true;
     taskStartInput.value = getLocalDateString(new Date());
-    taskDueInput.value = '';
+    taskDueInput.value = getLocalDateString(new Date());
     modalTitle.textContent = 'เพิ่มกำหนดการใหม่';
     setTaskMessage();
 }
