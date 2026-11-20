@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadline.</title>
+    <!-- นำเข้า Font Inter และ Noto Sans Thai -->
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="จัดการกำหนดส่งงานสำคัญ ติดตามความคืบหน้า และซิงก์ข้อมูลของคุณ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="theme.js" defer></script>
+</head>
+<body>
+
+    <div id="dashboard-view" class="view active">
+        <header class="navbar">
+            <div class="nav-container">
+                <a href="./index.html" class="logo">
+                    <img src="assets/Deadline.png" alt="Deadline." class="logo-img">
+                    <h1 class="logo-text">Deadline.</h1>
+                </a>
+                <nav class="nav-links">
+                    <a href="./about.html" class="nav-link">เกี่ยวกับเว็บไซต์</a>
+                </nav>
+                <div class="header-actions">
+                    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="สลับเป็นโหมดมืด" title="สลับเป็นโหมดมืด">
+                        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                            <path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.6 8.6 0 1 0 20.2 15.1Z"></path>
+                        </svg>
+                        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+                        </svg>
+                    </button>
+                    <button id="user-avatar" class="avatar-btn" title="ออกจากระบบ" aria-label="ออกจากระบบ">P</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <!-- แถบสถิติและปุ่มเพิ่มงาน -->
+            <div class="stats-header">
+                <div class="stats-group">
+                    <div class="stat-item">
+                        <span class="stat-label">ดำเนินการอยู่</span>
+                        <span id="active-count" class="stat-value">3</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">เสร็จสิ้น</span>
+                        <span id="completed-count" class="stat-value">0</span>
+                    </div>
+                </div>
+                <button id="open-modal-btn" class="btn-primary btn-pill">
+                    <span>+</span> เพิ่มกำหนดการ
+                </button>
+            </div>
+
+            <!-- แถบตัวกรองและค้นหา -->
+            <div class="controls-bar">
+                <div class="tabs">
+                    <button class="tab-btn active" data-filter="all" aria-pressed="true">ทั้งหมด</button>
+                    <button class="tab-btn" data-filter="active" aria-pressed="false">ดำเนินการอยู่</button>
+                    <button class="tab-btn" data-filter="completed" aria-pressed="false">เสร็จสิ้น</button>
+                </div>
+
+                <div class="search-sort">
+                    <div class="search-box">
+                        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="search" id="search-input" placeholder="ค้นหางาน" aria-label="ค้นหางาน">
+                    </div>
+
+                    <div class="sort-box">
+                        <select id="sort-select" aria-label="เรียงรายการ">
+                            <option value="due-asc">กำหนดส่งใกล้สุด</option>
+                            <option value="due-desc">กำหนดส่งไกลสุด</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- รายการการ์ดงาน -->
+            <p id="dashboard-message" class="form-message dashboard-message" role="status" aria-live="polite"></p>
+            <div id="task-list" class="task-list" aria-live="polite">
+                <!-- การ์ดงานจะถูกเรนเดอร์ผ่าน app.js -->
+            </div>
+        </main>
+    </div>
+
+    <!-- ================= MODAL: เพิ่ม / แก้ไขกำหนดการ ================= -->
+    <div id="task-modal" class="modal-overlay">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="modal-header">
+                <h3 id="modal-title">เพิ่มกำหนดการใหม่</h3>
+                <button id="close-modal-btn" class="icon-btn" type="button" aria-label="ปิด">✕</button>
+            </div>
+            <form id="task-form">
+                <input type="hidden" id="task-id">
+                <div class="form-group">
+                    <label for="task-title">ชื่องาน</label>
+                    <input type="text" id="task-title" maxlength="200" required placeholder="เช่น ส่งรายงานประจำเดือน">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="task-start">วันเริ่มต้น</label>
+                        <input type="date" id="task-start" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-due">กำหนดส่ง</label>
+                        <input type="date" id="task-due" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="task-tag">หมวดหมู่ (แท็ก)</label>
+                    <input type="text" id="task-tag" maxlength="40" placeholder="เช่น งาน" value="งาน">
+                </div>
+                <p id="task-message" class="form-message" role="alert" aria-live="polite"></p>
+                <div class="modal-actions">
+                    <button type="button" id="cancel-modal-btn" class="btn-secondary">ยกเลิก</button>
+                    <button type="submit" class="btn-primary">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

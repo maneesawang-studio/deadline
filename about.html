@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="รู้จัก Deadline เว็บจัดการกำหนดส่งงานที่ช่วยให้ติดตามงานสำคัญได้ง่ายขึ้น">
+    <title>เกี่ยวกับเว็บไซต์ | Deadline.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="theme.js" defer></script>
+</head>
+<body>
+    <div class="view active">
+        <header class="navbar">
+            <div class="nav-container">
+                <a href="./index.html" class="logo">
+                    <img src="assets/Deadline.png" alt="Deadline." class="logo-img">
+                    <span class="logo-text">Deadline.</span>
+                </a>
+                <nav class="nav-links">
+                    <a href="./login.html" class="nav-link">เข้าสู่ระบบ</a>
+                    <a href="./about.html" class="nav-link active" aria-current="page">เกี่ยวกับเว็บไซต์</a>
+                </nav>
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="สลับเป็นโหมดมืด" title="สลับเป็นโหมดมืด">
+                    <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.6 8.6 0 1 0 20.2 15.1Z"></path>
+                    </svg>
+                    <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="about-main">
+            <section class="about-hero">
+                <p class="eyebrow">เกี่ยวกับ Deadline</p>
+                <h1 class="hero-title">จัดการงานสำคัญ<br>ให้ทันเวลาของคุณ</h1>
+                <p class="hero-subtitle">Deadline ช่วยรวบรวมงาน วันเริ่มต้น และวันครบกำหนดไว้ในที่เดียว เพื่อให้คุณวางแผนและติดตามสิ่งที่ต้องทำได้ง่ายขึ้น</p>
+                <a class="btn-primary" href="./login.html">เริ่มจัดการงาน <span aria-hidden="true">→</span></a>
+            </section>
+
+            <section class="about-grid" aria-label="ความสามารถของเว็บไซต์">
+                <article class="about-card">
+                    <span class="about-card-number">01</span>
+                    <h2>เห็นกำหนดส่งชัดเจน</h2>
+                    <p>ดูวันที่เหลือหรือวันที่เลยกำหนดได้ทันที ช่วยจัดลำดับงานที่ควรทำก่อน</p>
+                </article>
+                <article class="about-card">
+                    <span class="about-card-number">02</span>
+                    <h2>จัดหมวดหมู่และค้นหา</h2>
+                    <p>ใส่แท็ก ค้นหางาน และกรองรายการตามสถานะเพื่อให้กลับมาหางานได้ง่าย</p>
+                </article>
+                <article class="about-card">
+                    <span class="about-card-number">03</span>
+                    <h2>ซิงก์ผ่านบัญชีของคุณ</h2>
+                    <p>เมื่อเข้าสู่ระบบ รายการงานจะจัดเก็บในบัญชี Firebase และพร้อมใช้งานบนอุปกรณ์อื่น</p>
+                </article>
+            </section>
+
+            <section class="about-note">
+                <h2>ข้อมูลและความเป็นส่วนตัว</h2>
+                <p>รายการงานผูกกับบัญชีผู้ใช้และจำกัดการเข้าถึงด้วย Firestore Security Rules โปรดใช้รหัสผ่านที่คาดเดายาก และตรวจสอบการตั้งค่า Firebase ก่อนเปิดให้ใช้งานจริง</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
