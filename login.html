@@ -4,30 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#ffffff">
-    <meta name="description" content="เข้าสู่ระบบหรือสมัครบัญชี Deadline เพื่อจัดการกำหนดส่งงาน">
+    <meta name="description" content="เข้าสู่ระบบหรือสร้างบัญชี Deadline เพื่อบันทึก ค้นหา และติดตามกำหนดส่งงานของคุณ">
     <meta name="robots" content="noindex, follow">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="th_TH">
     <meta property="og:site_name" content="Deadline">
     <meta property="og:title" content="เข้าสู่ระบบ | Deadline">
-    <meta property="og:description" content="เข้าสู่ระบบหรือสมัครบัญชี Deadline เพื่อจัดการงานและติดตามกำหนดส่งของคุณ">
+    <meta property="og:description" content="เข้าสู่ระบบหรือสร้างบัญชี Deadline เพื่อบันทึก ค้นหา และติดตามกำหนดส่งงานของคุณ">
     <meta property="og:url" content="https://maneesawang-studio.github.io/deadline/login.html">
-    <meta property="og:image" content="https://maneesawang-studio.github.io/deadline/assets/Deadline-512.png">
+    <meta property="og:image" content="https://maneesawang-studio.github.io/deadline/assets/Deadline.png">
     <meta property="og:image:alt" content="โลโก้ Deadline">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image:width" content="4500">
+    <meta property="og:image:height" content="4500">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="เข้าสู่ระบบ | Deadline">
-    <meta name="twitter:description" content="เข้าสู่ระบบหรือสมัครบัญชี Deadline เพื่อจัดการงานและติดตามกำหนดส่งของคุณ">
-    <meta name="twitter:image" content="https://maneesawang-studio.github.io/deadline/assets/Deadline-512.png">
+    <meta name="twitter:description" content="เข้าสู่ระบบหรือสร้างบัญชี Deadline เพื่อบันทึก ค้นหา และติดตามกำหนดส่งงานของคุณ">
+    <meta name="twitter:image" content="https://maneesawang-studio.github.io/deadline/assets/Deadline.png">
     <meta name="twitter:image:alt" content="โลโก้ Deadline">
     <meta name="application-name" content="Deadline">
     <meta name="apple-mobile-web-app-title" content="Deadline">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="canonical" href="https://maneesawang-studio.github.io/deadline/login.html">
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/Deadline-192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/Deadline-180.png">
+    <link rel="icon" type="image/png" href="assets/Deadline.png">
+    <link rel="apple-touch-icon" href="assets/Deadline.png">
     <link rel="manifest" href="site.webmanifest">
     <title>เข้าสู่ระบบ | Deadline</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,13 +40,14 @@
     <div class="view active">
         <header class="navbar">
             <div class="nav-container">
-                <a href="./index.html" class="logo">
-                    <img src="assets/Deadline.svg" alt="Deadline." class="logo-img">
-                    <span class="logo-text">Deadline.</span>
+                <a href="./index.html" class="logo" aria-label="Deadline หน้าหลัก">
+                    <img src="assets/Deadline.svg" alt="" class="logo-img">
+                    <span class="logo-text">Deadline</span>
                 </a>
-                <nav class="nav-links">
+                <nav class="nav-links" aria-label="เมนูหลัก">
+                    <a href="./index.html" class="nav-link">หน้าหลัก</a>
+                    <a href="./about.html" class="nav-link">เกี่ยวกับ</a>
                     <a href="./login.html" class="nav-link active" aria-current="page">เข้าสู่ระบบ</a>
-                    <a href="./about.html" class="nav-link">เกี่ยวกับเว็บไซต์</a>
                 </nav>
                 <button id="theme-toggle" class="theme-toggle" type="button" aria-label="สลับเป็นโหมดมืด" title="สลับเป็นโหมดมืด">
                     <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
@@ -63,30 +64,30 @@
         <main class="login-main">
             <div class="login-grid">
                 <section class="hero-content">
-                    <p class="eyebrow">พื้นที่จัดการกำหนดส่ง</p>
-                    <h1 class="hero-title">จัดการงานสำคัญ<br>ให้ทันเวลาของคุณ</h1>
-                    <p class="hero-subtitle">พื้นที่เรียบง่ายสำหรับจัดงาน วันเริ่มต้น และกำหนดส่ง ให้ทุกอย่างที่ต้องทำอยู่ในที่เดียว</p>
+                    <p class="eyebrow">บัญชี Deadline</p>
+                    <h1 class="hero-title">งานและกำหนดส่ง<br>อยู่ในที่เดียว</h1>
+                    <p class="hero-subtitle">บันทึกวันเริ่มต้นและวันครบกำหนด ค้นหางานที่ต้องการ แล้วอัปเดตสถานะได้เมื่อทำเสร็จ</p>
 
                     <ul class="feature-list">
                         <li>
                             <span class="dot"></span>
                             <div>
                                 <strong>เห็นวันครบกำหนดได้ชัดเจน</strong>
-                                <p>รู้ว่างานไหนใกล้ถึงกำหนด โดยไม่ต้องจำเอง</p>
+                                <p>ดูเวลาที่เหลือหรือรายการที่เลยกำหนดได้จากหน้ารายการ</p>
                             </div>
                         </li>
                         <li>
                             <span class="dot"></span>
                             <div>
-                                <strong>เริ่มจากสิ่งสำคัญ</strong>
-                                <p>กำหนดวันเริ่มและวันส่ง เพื่อติดตามความคืบหน้า</p>
+                                <strong>ค้นหาและจัดลำดับงาน</strong>
+                                <p>กรองตามสถานะและเรียงตามวันครบกำหนด</p>
                             </div>
                         </li>
                         <li>
                             <span class="dot"></span>
                             <div>
-                                <strong>ต่อเนื่องทุกอุปกรณ์</strong>
-                                <p>เข้าสู่ระบบบัญชีเดิมเพื่อดูรายการงานของคุณ</p>
+                                <strong>ซิงก์ผ่านบัญชีของคุณ</strong>
+                                <p>เปิดรายการงานบนอุปกรณ์อื่นด้วยบัญชีเดียวกัน</p>
                             </div>
                         </li>
                     </ul>
@@ -117,10 +118,14 @@
                             <button id="auth-switch-btn" type="button" class="register-link">ยังไม่มีบัญชี? สมัครใช้งาน</button>
                         </div>
                     </div>
-                    <p class="privacy-note">ข้อมูลกำหนดการจัดเก็บในบัญชี Firebase ของคุณ และเข้าถึงได้เฉพาะเจ้าของบัญชี</p>
+                    <p class="privacy-note">รายการงานเชื่อมโยงกับบัญชีที่เข้าสู่ระบบ <a href="./about.html#privacy">อ่านข้อมูลและความเป็นส่วนตัว</a></p>
                 </section>
             </div>
         </main>
+        <footer class="landing-footer">
+            <a href="./about.html">เกี่ยวกับ Deadline</a>
+            <span>Deadline · จัดการงานและติดตามกำหนดส่ง</span>
+        </footer>
     </div>
     <script type="module" src="auth.js"></script>
 </body>
