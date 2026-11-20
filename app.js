@@ -47,6 +47,7 @@ const taskModal = document.getElementById('task-modal');
 const openModalBtn = document.getElementById('open-modal-btn');
 const closeModalBtn = document.getElementById('close-modal-btn');
 const cancelModalBtn = document.getElementById('cancel-modal-btn');
+const deleteTaskBtn = document.getElementById('delete-task-btn');
 const taskForm = document.getElementById('task-form');
 const taskMessage = document.getElementById('task-message');
 const modalTitle = document.getElementById('modal-title');
@@ -201,16 +202,27 @@ function formatThaiDate(dateString) {
     };
 }
 
-function getDaysRemainingText(dueDateString) {
+function getDaysRemaining(dueDateString) {
     const today = new Date();
     const todayUtc = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
     const due = new Date(`${dueDateString}T00:00:00`);
-    if (Number.isNaN(due.getTime())) return 'ไม่ระบุกำหนดส่ง';
+    if (Number.isNaN(due.getTime())) return null;
     const dueUtc = Date.UTC(due.getFullYear(), due.getMonth(), due.getDate());
-    const difference = Math.round((dueUtc - todayUtc) / 86400000);
-    if (difference > 0) return `เหลืออีก ${difference} วัน`;
-    if (difference === 0) return 'ครบกำหนดวันนี้';
-    return `เลยกำหนด ${Math.abs(difference)} วัน`;
+    return Math.round((dueUtc - todayUtc) / 86400000);
+}
+
+function getDaysRemainingText(daysRemaining) {
+    if (daysRemaining === null) return 'ไม่ระบุกำหนดส่ง';
+    if (daysRemaining > 0) return `เหลืออีก ${daysRemaining} วัน`;
+    if (daysRemaining === 0) return 'ครบกำหนดวันนี้';
+    return `เลยกำหนด ${Math.abs(daysRemaining)} วัน`;
+}
+
+function getDaysRemainingClass(daysRemaining) {
+    if (daysRemaining === null) return '';
+    if (daysRemaining < 3) return 'days-left-pill--urgent';
+    if (daysRemaining < 7) return 'days-left-pill--soon';
+    return '';
 }
 
 function createElement(tag, className, text) {
@@ -226,8 +238,8 @@ function createActionButton(label, className, path, onClick) {
     button.title = label;
     button.setAttribute('aria-label', label);
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('width', '15');
-    svg.setAttribute('height', '15');
+    svg.setAttribute('width', '16');
+    svg.setAttribute('height', '16');
     svg.setAttribute('viewBox', '0 0 24 24');
     svg.setAttribute('fill', 'none');
     svg.setAttribute('stroke', 'currentColor');
@@ -244,24 +256,29 @@ function createActionButton(label, className, path, onClick) {
 
 function renderTaskCard(task) {
     const card = createElement('article', `task-card${task.completed ? ' completed' : ''}`);
-    const left = createElement('div', 'task-left');
     const due = createElement('div', 'due-badge-box');
     const dueDate = formatThaiDate(task.dueDate);
     due.append(
-        createElement('span', 'due-label', 'กำหนดส่ง'),
+        createElement('span', 'due-label', 'deadline'),
         createElement('span', 'due-date', dueDate.dayMonth),
         createElement('span', 'due-year', dueDate.year)
     );
 
     const info = createElement('div', 'task-info');
     const meta = createElement('div', 'task-meta');
+    const daysRemaining = getDaysRemaining(task.dueDate);
+    const daysClass = task.completed
+        ? 'days-left-pill--complete'
+        : getDaysRemainingClass(daysRemaining);
     meta.append(
-        createElement('span', 'days-left-pill', task.completed ? 'เสร็จสิ้นแล้ว' : getDaysRemainingText(task.dueDate)),
+        createElement(
+            'span',
+            `days-left-pill ${daysClass}`.trim(),
+            task.completed ? 'เสร็จสิ้นแล้ว' : getDaysRemainingText(daysRemaining)
+        ),
         createElement('span', 'start-date-text', `เริ่มเมื่อ ${formatThaiDate(task.startDate).dayMonth}`)
     );
-    if (task.tag) meta.appendChild(createElement('span', 'tag-pill', `#${task.tag}`));
-    info.append(meta, createElement('div', 'task-title', task.title));
-    left.append(due, info);
+    info.append(createElement('div', 'task-title', task.title), meta);
 
     const actions = createElement('div', 'task-actions');
     actions.append(
@@ -276,22 +293,10 @@ function renderTaskCard(task) {
             '',
             { tag: 'path', attributes: { d: 'M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z' } },
             () => editTask(task)
-        ),
-        createActionButton(
-            'ลบ',
-            '',
-            { tag: 'line', attributes: { x1: '18', y1: '6', x2: '6', y2: '18' } },
-            () => deleteTask(task.id)
         )
     );
-    const deleteShape = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    deleteShape.setAttribute('x1', '6');
-    deleteShape.setAttribute('y1', '6');
-    deleteShape.setAttribute('x2', '18');
-    deleteShape.setAttribute('y2', '18');
-    actions.lastChild.querySelector('svg').appendChild(deleteShape);
 
-    card.append(left, actions);
+    card.append(due, info, actions);
     return card;
 }
 
@@ -340,18 +345,21 @@ async function toggleComplete(id, completed) {
     }
 }
 
-async function deleteTask(id) {
-    if (!confirm('ต้องการลบกำหนดการนี้ใช่หรือไม่?')) return;
+async function deleteTask(id, reportError = setDashboardMessage) {
+    if (!confirm('ต้องการลบกำหนดการนี้ใช่หรือไม่?')) return false;
     try {
         await deleteDoc(getTaskRef(id));
         setDashboardMessage();
+        return true;
     } catch (error) {
-        setDashboardMessage(getErrorMessage(error, 'ลบกำหนดการ'));
+        reportError(getErrorMessage(error, 'ลบกำหนดการ'));
+        return false;
     }
 }
 
 function editTask(task) {
     taskIdInput.value = task.id;
+    deleteTaskBtn.hidden = false;
     taskTitleInput.value = task.title;
     taskStartInput.value = task.startDate;
     taskDueInput.value = task.dueDate;
@@ -369,6 +377,7 @@ function openModal() {
 function resetTaskForm() {
     taskForm.reset();
     taskIdInput.value = '';
+    deleteTaskBtn.hidden = true;
     taskStartInput.value = getLocalDateString(new Date());
     taskDueInput.value = '';
     taskTagInput.value = 'งาน';
@@ -395,6 +404,20 @@ openModalBtn.addEventListener('click', () => {
 });
 closeModalBtn.addEventListener('click', closeModal);
 cancelModalBtn.addEventListener('click', closeModal);
+deleteTaskBtn.addEventListener('click', async () => {
+    const id = taskIdInput.value;
+    if (!id) {
+        setTaskMessage('ไม่พบรายการที่ต้องการลบ');
+        return;
+    }
+
+    deleteTaskBtn.disabled = true;
+    try {
+        if (await deleteTask(id, setTaskMessage)) closeModal();
+    } finally {
+        deleteTaskBtn.disabled = false;
+    }
+});
 taskModal.addEventListener('click', event => {
     if (event.target === taskModal) closeModal();
 });

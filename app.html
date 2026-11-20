@@ -97,8 +97,8 @@
                         <span id="completed-count" class="stat-value">0</span>
                     </div>
                 </div>
-                <button id="open-modal-btn" class="btn-primary btn-pill">
-                    <span>+</span> เพิ่มกำหนดการ
+                <button id="open-modal-btn" class="btn-primary btn-pill" type="button" aria-label="เพิ่มกำหนดการ">
+                    <span aria-hidden="true">+</span><span class="btn-label">เพิ่มกำหนดการ</span>
                 </button>
             </div>
 
@@ -165,6 +165,7 @@
                 </div>
                 <p id="task-message" class="form-message" role="alert" aria-live="polite"></p>
                 <div class="modal-actions">
+                    <button type="button" id="delete-task-btn" class="btn-danger" hidden>ลบรายการ</button>
                     <button type="button" id="cancel-modal-btn" class="btn-secondary">ยกเลิก</button>
                     <button type="submit" class="btn-primary">บันทึก</button>
                 </div>
