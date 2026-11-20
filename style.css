@@ -2430,6 +2430,7 @@ textarea,
         margin-bottom: 16px;
         width: 100%;
         min-width: 0;
+        max-width: 100%;
     }
 
     #task-modal .form-group label {
@@ -2449,6 +2450,8 @@ textarea,
     }
 
     #task-modal .form-group input[type="date"] {
+        -webkit-appearance: none;
+        appearance: none;
         width: 100%;
         min-width: 0;
         max-width: 100%;
@@ -2467,6 +2470,7 @@ textarea,
     #task-modal .form-row {
         width: 100%;
         min-width: 0;
+        max-width: 100%;
         grid-template-columns: minmax(0, 1fr);
         gap: 0;
     }
