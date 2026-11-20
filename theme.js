@@ -32,6 +32,11 @@ function applyTheme(theme) {
     if (themeColor) {
         themeColor.content = theme === 'dark' ? '#111213' : '#ffffff';
     }
+
+    const appleStatusBar = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+    if (appleStatusBar) {
+        appleStatusBar.content = theme === 'dark' ? 'black-translucent' : 'default';
+    }
 }
 
 applyTheme(savedTheme || (colorScheme.matches ? 'dark' : 'light'));
