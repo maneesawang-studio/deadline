@@ -291,8 +291,19 @@ body {
 }
 
 .form-group input[type="date"] {
+    display: block;
+    width: 100%;
     min-width: 0;
     max-width: 100%;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    -webkit-appearance: auto;
+    appearance: auto;
+}
+
+.form-group input[type="date"]::-webkit-date-and-time-value {
+    min-height: 1.5em;
+    text-align: left;
 }
 
 .form-group input:focus {
@@ -683,45 +694,41 @@ body {
 .task-list {
     display: flex;
     flex-direction: column;
-    gap: 0;
-    overflow: hidden;
-    background: var(--bg-main);
-    border-radius: 24px;
+    gap: 12px;
+    overflow: visible;
 }
 
 .task-card {
     display: grid;
-    grid-template-columns: 56px minmax(0, 1fr) auto;
+    grid-template-columns: 88px minmax(0, 1fr) 44px;
     grid-template-areas: "due info actions";
     align-items: center;
-    gap: 18px;
-    background: transparent;
-    border: 0;
-    border-radius: 0;
-    padding: 16px 22px;
-    min-height: 100px;
+    gap: 16px;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 18px;
+    min-height: 124px;
     position: relative;
-    transition: background-color 0.18s ease;
+    transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
 }
 
 .task-card:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 96px;
-    height: 1px;
-    background: var(--border-color);
-    opacity: 0.55;
-    pointer-events: none;
+    display: none;
 }
 
 .task-card:hover {
-    background-color: var(--bg-subtle);
+    background-color: var(--bg-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-1px);
+}
+
+.task-card.menu-open {
+    z-index: 2;
 }
 
 .task-card.completed {
-    opacity: 0.66;
+    opacity: 0.78;
 }
 
 .task-card.completed .task-title {
@@ -732,9 +739,9 @@ body {
     grid-area: due;
     background-color: var(--bg-muted);
     color: var(--text-primary);
-    border-radius: 14px;
-    width: 56px;
-    height: 60px;
+    border-radius: 16px;
+    width: 88px;
+    min-height: 82px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -744,25 +751,25 @@ body {
 }
 
 .due-label {
-    font-size: 9px;
-    font-weight: 500;
+    font-size: 10px;
+    font-weight: 600;
     color: var(--text-secondary);
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
 .due-date {
     color: var(--accent-blue);
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 700;
     line-height: 1.2;
     white-space: nowrap;
 }
 
 .due-year {
     font-family: 'Inter', sans-serif;
-    font-size: 10px;
+    font-size: 11px;
     color: var(--date-muted);
-    margin-top: 2px;
+    margin-top: 3px;
 }
 
 .task-info {
@@ -811,8 +818,8 @@ body {
 }
 
 .task-title {
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 600;
     color: var(--text-primary);
     line-height: 1.35;
     overflow-wrap: anywhere;
@@ -822,8 +829,10 @@ body {
 .task-actions {
     grid-area: actions;
     display: flex;
-    align-items: center;
-    gap: 8px;
+    align-items: flex-start;
+    justify-content: flex-end;
+    position: relative;
+    align-self: start;
 }
 
 .action-btn {
@@ -867,17 +876,57 @@ body {
     color: var(--text-primary);
     background-color: var(--bg-hover);
 }
-.check-circle {
-    width: 44px;
-    height: 44px;
+
+.task-menu-toggle {
     background: var(--bg-muted);
-    border: 0;
-    border-radius: 50%;
-    color: var(--accent-blue);
+    color: var(--text-secondary);
 }
-.task-card.completed .check-circle {
-    background-color: var(--accent-blue);
-    color: var(--accent-blue-text);
+
+.task-menu-toggle:hover,
+.task-menu-toggle[aria-expanded="true"] {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+}
+
+.task-action-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 3;
+    display: grid;
+    min-width: 196px;
+    padding: 6px;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+
+.task-action-menu[hidden] {
+    display: none;
+}
+
+.task-menu-item {
+    min-height: 44px;
+    padding: 9px 12px;
+    background: transparent;
+    border: 0;
+    border-radius: 9px;
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.task-menu-item:hover,
+.task-menu-item:focus-visible {
+    background: var(--bg-muted);
+}
+
+.task-menu-item:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: -2px;
 }
 /* ================= MODAL ================= */
 .modal-overlay {
@@ -931,8 +980,8 @@ cursor: pointer;
 }
 .form-row {
 display: grid;
-grid-template-columns: repeat(2, minmax(0, 1fr));
-gap: 12px;
+grid-template-columns: minmax(0, 1fr);
+gap: 0;
 }
 .modal-actions {
 display: flex;
@@ -1655,15 +1704,14 @@ textarea,
     }
 
     .task-card {
-        grid-template-columns: 56px minmax(0, 1fr) auto;
+        grid-template-columns: 82px minmax(0, 1fr) 44px;
         grid-template-areas: "due info actions";
         gap: 12px;
         padding: 14px 16px;
     }
 
     .task-card:not(:last-child)::after {
-        right: 16px;
-        left: 84px;
+        display: none;
     }
 
     .task-info {
@@ -1690,7 +1738,6 @@ textarea,
 
     .task-actions {
         justify-content: flex-end;
-        gap: 8px;
     }
 
     .modal-overlay {
@@ -1854,12 +1901,14 @@ textarea,
     }
 
     #task-modal .form-group input[type="date"] {
-        min-height: 44px;
+        height: 48px;
+        min-height: 48px;
+        font-size: 16px;
     }
 
     #task-modal .form-row {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
     }
 
     #task-modal .modal-actions {
@@ -2435,29 +2484,23 @@ textarea,
 }
 
 #dashboard-view .task-list {
-    gap: 0;
-    overflow: hidden;
-    background: var(--bg-main);
-    border: 0;
-    border-radius: 28px;
+    gap: 12px;
+    overflow: visible;
+    background: transparent;
 }
 
 #dashboard-view .task-card {
-    grid-template-columns: 56px minmax(0, 1fr) auto;
+    grid-template-columns: 88px minmax(0, 1fr) 44px;
     gap: 16px;
-    min-height: 96px;
-    padding: 16px 20px;
-    background: transparent;
-    border: 0;
-    border-radius: 0;
+    min-height: 124px;
+    padding: 18px;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
 }
 
 #dashboard-view .task-card:not(:last-child)::after {
-    display: block;
-    right: 20px;
-    left: 92px;
-    background: var(--border-color);
-    opacity: 0.45;
+    display: none;
 }
 
 #dashboard-view .task-card:hover {
@@ -2465,15 +2508,15 @@ textarea,
 }
 
 #dashboard-view .due-badge-box {
-    width: 56px;
-    height: 58px;
-    background: transparent;
-    border-radius: var(--radius-full);
+    width: 88px;
+    min-height: 82px;
+    background: var(--bg-muted);
+    border-radius: 16px;
 }
 
 #dashboard-view .due-date {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 #dashboard-view .task-title {
@@ -2497,11 +2540,6 @@ textarea,
 
 #dashboard-view .action-btn {
     color: var(--text-muted);
-}
-
-#dashboard-view .check-circle {
-    background: var(--bg-muted);
-    color: var(--accent-blue);
 }
 
 #dashboard-view .empty-state {
@@ -2606,19 +2644,23 @@ textarea,
     }
 
     #dashboard-view .task-card {
-        grid-template-columns: 52px minmax(0, 1fr) auto;
-        gap: 12px;
-        padding: 14px;
+        grid-template-columns: 76px minmax(0, 1fr) 44px;
+        gap: 10px;
+        min-height: 108px;
+        padding: 12px;
     }
 
     #dashboard-view .task-card:not(:last-child)::after {
-        right: 14px;
-        left: 78px;
+        display: none;
     }
 
     #dashboard-view .due-badge-box {
-        width: 52px;
-        height: 56px;
+        width: 76px;
+        min-height: 76px;
+    }
+
+    #dashboard-view .due-date {
+        font-size: 17px;
     }
 }
 

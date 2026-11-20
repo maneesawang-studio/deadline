@@ -55,7 +55,6 @@ const taskIdInput = document.getElementById('task-id');
 const taskTitleInput = document.getElementById('task-title');
 const taskStartInput = document.getElementById('task-start');
 const taskDueInput = document.getElementById('task-due');
-const taskTagInput = document.getElementById('task-tag');
 
 const THAI_MONTHS = [
     'ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.',
@@ -161,6 +160,12 @@ document.addEventListener('click', event => {
     if (!accountMenuWrap.contains(event.target)) closeAccountMenu();
 });
 
+document.addEventListener('click', event => {
+    if (!(event.target instanceof Element) || !event.target.closest('.task-actions')) {
+        closeTaskMenus();
+    }
+});
+
 accountMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => closeAccountMenu());
 });
@@ -244,6 +249,8 @@ function createActionButton(label, className, path, onClick) {
     svg.setAttribute('fill', 'none');
     svg.setAttribute('stroke', 'currentColor');
     svg.setAttribute('stroke-width', '2');
+    svg.setAttribute('stroke-linecap', 'round');
+    svg.setAttribute('stroke-linejoin', 'round');
     const shape = document.createElementNS('http://www.w3.org/2000/svg', path.tag);
     for (const [attribute, value] of Object.entries(path.attributes)) {
         shape.setAttribute(attribute, value);
@@ -254,12 +261,23 @@ function createActionButton(label, className, path, onClick) {
     return button;
 }
 
+function closeTaskMenus(restoreFocus = false) {
+    const openButtons = taskListEl.querySelectorAll('.task-menu-toggle[aria-expanded="true"]');
+    openButtons.forEach(button => {
+        button.setAttribute('aria-expanded', 'false');
+        button.nextElementSibling.hidden = true;
+        button.closest('.task-card').classList.remove('menu-open');
+    });
+    if (restoreFocus && openButtons.length > 0) openButtons[0].focus();
+    return openButtons.length > 0;
+}
+
 function renderTaskCard(task) {
     const card = createElement('article', `task-card${task.completed ? ' completed' : ''}`);
     const due = createElement('div', 'due-badge-box');
     const dueDate = formatThaiDate(task.dueDate);
     due.append(
-        createElement('span', 'due-label', 'deadline'),
+        createElement('span', 'due-label', 'กำหนดส่ง'),
         createElement('span', 'due-date', dueDate.dayMonth),
         createElement('span', 'due-year', dueDate.year)
     );
@@ -281,20 +299,44 @@ function renderTaskCard(task) {
     info.append(createElement('div', 'task-title', task.title), meta);
 
     const actions = createElement('div', 'task-actions');
-    actions.append(
-        createActionButton(
-            task.completed ? 'ทำเครื่องหมายว่ายังไม่เสร็จ' : 'ทำเครื่องหมายว่าเสร็จสิ้น',
-            'check-circle',
-            { tag: 'polyline', attributes: { points: '20 6 9 17 4 12' } },
-            () => toggleComplete(task.id, !task.completed)
-        ),
-        createActionButton(
-            'แก้ไข',
-            '',
-            { tag: 'path', attributes: { d: 'M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z' } },
-            () => editTask(task)
-        )
+    const menu = createElement('div', 'task-action-menu');
+    menu.hidden = true;
+    const menuToggle = createActionButton(
+        'ตัวเลือกเพิ่มเติม',
+        'task-menu-toggle',
+        { tag: 'path', attributes: { d: 'M12 5v.01M12 12v.01M12 19v.01' } },
+        () => {
+            const shouldOpen = menu.hidden;
+            closeTaskMenus();
+            menu.hidden = !shouldOpen;
+            menuToggle.setAttribute('aria-expanded', String(shouldOpen));
+            card.classList.toggle('menu-open', shouldOpen);
+        }
     );
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menu.setAttribute('role', 'group');
+    menu.setAttribute('aria-label', 'ตัวเลือกกำหนดการ');
+
+    const completeAction = createElement(
+        'button',
+        'task-menu-item',
+        task.completed ? 'ทำเครื่องหมายว่ายังไม่เสร็จ' : 'ทำเครื่องหมายว่าเสร็จสิ้น'
+    );
+    completeAction.type = 'button';
+    completeAction.addEventListener('click', () => {
+        closeTaskMenus();
+        toggleComplete(task.id, !task.completed);
+    });
+
+    const editAction = createElement('button', 'task-menu-item', 'แก้ไข');
+    editAction.type = 'button';
+    editAction.addEventListener('click', () => {
+        closeTaskMenus();
+        editTask(task);
+    });
+
+    menu.append(completeAction, editAction);
+    actions.append(menuToggle, menu);
 
     card.append(due, info, actions);
     return card;
@@ -309,11 +351,10 @@ function renderTasks() {
     const query = searchQuery.toLocaleLowerCase();
     const filtered = tasks.filter(task => {
         const title = typeof task.title === 'string' ? task.title : '';
-        const tag = typeof task.tag === 'string' ? task.tag : '';
         const matchesFilter = currentFilter === 'all' ||
             (currentFilter === 'active' && !task.completed) ||
             (currentFilter === 'completed' && task.completed);
-        return matchesFilter && `${title} ${tag}`.toLocaleLowerCase().includes(query);
+        return matchesFilter && title.toLocaleLowerCase().includes(query);
     }).sort((a, b) => {
         const dateA = Date.parse(`${a.dueDate}T00:00:00`) || 0;
         const dateB = Date.parse(`${b.dueDate}T00:00:00`) || 0;
@@ -363,7 +404,6 @@ function editTask(task) {
     taskTitleInput.value = task.title;
     taskStartInput.value = task.startDate;
     taskDueInput.value = task.dueDate;
-    taskTagInput.value = task.tag || '';
     modalTitle.textContent = 'แก้ไขกำหนดการ';
     setTaskMessage();
     openModal();
@@ -380,7 +420,6 @@ function resetTaskForm() {
     deleteTaskBtn.hidden = true;
     taskStartInput.value = getLocalDateString(new Date());
     taskDueInput.value = '';
-    taskTagInput.value = 'งาน';
     modalTitle.textContent = 'เพิ่มกำหนดการใหม่';
     setTaskMessage();
 }
@@ -427,6 +466,8 @@ document.addEventListener('keydown', event => {
         closeSettings();
     } else if (!accountMenu.hidden) {
         closeAccountMenu(true);
+    } else if (closeTaskMenus(true)) {
+        return;
     } else if (taskModal.classList.contains('open')) {
         closeModal();
     }
@@ -438,14 +479,13 @@ taskForm.addEventListener('submit', async event => {
     const title = taskTitleInput.value.trim();
     const startDate = taskStartInput.value;
     const dueDate = taskDueInput.value;
-    const tag = taskTagInput.value.trim().replace(/^#/, '');
 
     if (!title || !startDate || !dueDate || dueDate < startDate) {
         setTaskMessage('กรุณากรอกข้อมูลงานให้ครบ และกำหนดส่งต้องไม่อยู่ก่อนวันเริ่มต้น');
         return;
     }
 
-    const task = { title, startDate, dueDate, tag, completed: false };
+    const task = { title, startDate, dueDate, completed: false };
     const submitButton = taskForm.querySelector('button[type="submit"]');
     submitButton.disabled = true;
     try {
