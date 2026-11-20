@@ -240,6 +240,7 @@ body {
 
 .form-group {
     margin-bottom: 16px;
+    min-width: 0;
 }
 
 .form-group label {
@@ -260,6 +261,11 @@ body {
     border-radius: var(--radius-sm);
     outline: none;
     transition: border-color 0.2s, background-color 0.2s;
+}
+
+.form-group input[type="date"] {
+    min-width: 0;
+    max-width: 100%;
 }
 
 .form-group input:focus {
@@ -834,7 +840,7 @@ cursor: pointer;
 }
 .form-row {
 display: grid;
-grid-template-columns: 1fr 1fr;
+grid-template-columns: repeat(2, minmax(0, 1fr));
 gap: 12px;
 }
 .modal-actions {
@@ -1522,7 +1528,7 @@ textarea,
     }
 
     .form-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 0;
     }
 
