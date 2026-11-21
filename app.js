@@ -365,6 +365,7 @@ function renderTaskCard(task) {
 
 function setActiveFilter(filter) {
     if (filter !== 'active' && filter !== 'completed') return;
+    const scrollPosition = window.scrollY;
     currentFilter = filter;
     tabBtns.forEach(tab => {
         const isActive = tab.dataset.filter === filter;
@@ -372,6 +373,9 @@ function setActiveFilter(filter) {
         tab.setAttribute('aria-pressed', String(isActive));
     });
     renderTasks();
+    requestAnimationFrame(() => {
+        window.scrollTo(0, scrollPosition);
+    });
 }
 
 function renderTasks() {
@@ -464,7 +468,7 @@ function closeModal() {
     taskModal.classList.remove('open');
     unlockPageScroll();
     resetTaskForm();
-    openModalBtn.focus();
+    openModalBtn.focus({ preventScroll: true });
 }
 
 function getLocalDateString(date) {
