@@ -451,7 +451,7 @@ function editTask(task) {
 function openModal() {
     lockPageScroll();
     taskModal.classList.add('open');
-    taskTitleInput.focus();
+    closeModalBtn.focus();
 }
 
 function resetTaskForm() {
