@@ -153,6 +153,12 @@
                 <button id="close-modal-btn" class="icon-btn" type="button" aria-label="ปิด">✕</button>
             </div>
             <form id="task-form">
+                
+                <input type="hidden" id="task-id">
+                <div class="form-group">
+                    <label for="task-title">ชื่องาน</label>
+                    <input type="text" id="task-title" maxlength="200" required placeholder="เช่น ส่งรายงานประจำเดือน">
+                </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="task-start">วันเริ่มต้น</label>
@@ -163,10 +169,9 @@
                         <input type="date" id="task-due" required>
                     </div>
                 </div>
-                <input type="hidden" id="task-id">
                 <div class="form-group">
-                    <label for="task-title">ชื่องาน</label>
-                    <input type="text" id="task-title" maxlength="200" required placeholder="เช่น ส่งรายงานประจำเดือน">
+                    <label for="task-description">รายละเอียดเพิ่มเติม</label>
+                    <textarea id="task-description" maxlength="1000" rows="4" placeholder="เพิ่มรายละเอียด งานหรือหมายเหตุเพิ่มเติม"></textarea>
                 </div>
                 <p id="task-message" class="form-message" role="alert" aria-live="polite"></p>
                 <div class="modal-actions">

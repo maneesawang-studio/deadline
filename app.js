@@ -55,6 +55,7 @@ const taskIdInput = document.getElementById('task-id');
 const taskTitleInput = document.getElementById('task-title');
 const taskStartInput = document.getElementById('task-start');
 const taskDueInput = document.getElementById('task-due');
+const taskDescriptionInput = document.getElementById('task-description');
 
 const THAI_MONTHS = [
     'ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.',
@@ -296,7 +297,10 @@ function renderTaskCard(task) {
         ),
         createElement('span', 'start-date-text', `เริ่มเมื่อ ${formatThaiDate(task.startDate).dayMonth}`)
     );
-    info.append(createElement('div', 'task-title', task.title), meta);
+    info.append(meta, createElement('div', 'task-title', task.title));
+    if (typeof task.description === 'string' && task.description.trim()) {
+        info.append(createElement('div', 'task-description', task.description.trim()));
+    }
 
     const actions = createElement('div', 'task-actions');
     const menu = createElement('div', 'task-action-menu');
@@ -354,7 +358,9 @@ function renderTasks() {
         const matchesFilter = currentFilter === 'all' ||
             (currentFilter === 'active' && !task.completed) ||
             (currentFilter === 'completed' && task.completed);
-        return matchesFilter && title.toLocaleLowerCase().includes(query);
+        const description = typeof task.description === 'string' ? task.description : '';
+        return matchesFilter &&
+            `${title} ${description}`.toLocaleLowerCase().includes(query);
     }).sort((a, b) => {
         const dateA = Date.parse(`${a.dueDate}T00:00:00`) || 0;
         const dateB = Date.parse(`${b.dueDate}T00:00:00`) || 0;
@@ -404,6 +410,7 @@ function editTask(task) {
     taskTitleInput.value = task.title;
     taskStartInput.value = task.startDate;
     taskDueInput.value = task.dueDate;
+    taskDescriptionInput.value = typeof task.description === 'string' ? task.description : '';
     modalTitle.textContent = 'แก้ไขกำหนดการ';
     setTaskMessage();
     openModal();
@@ -479,13 +486,14 @@ taskForm.addEventListener('submit', async event => {
     const title = taskTitleInput.value.trim();
     const startDate = taskStartInput.value;
     const dueDate = taskDueInput.value;
+    const description = taskDescriptionInput.value.trim();
 
     if (!title || !startDate || !dueDate || dueDate < startDate) {
         setTaskMessage('กรุณากรอกข้อมูลงานให้ครบ และกำหนดส่งต้องไม่อยู่ก่อนวันเริ่มต้น');
         return;
     }
 
-    const task = { title, startDate, dueDate, completed: false };
+    const task = { title, description, startDate, dueDate, completed: false };
     const submitButton = taskForm.querySelector('button[type="submit"]');
     submitButton.disabled = true;
     try {

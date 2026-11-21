@@ -278,16 +278,35 @@ body {
     color: var(--text-primary);
 }
 
-.form-group input {
+.form-group input,
+.form-group textarea {
     width: 100%;
     padding: 10px 14px;
     font-size: 14px;
     font-family: inherit;
     background-color: var(--bg-input);
+    color: var(--text-primary);
     border: 0;
     border-radius: var(--radius-sm);
     outline: none;
+    resize: vertical;
     transition: border-color 0.2s, background-color 0.2s;
+}
+
+.form-group textarea {
+    min-height: 96px;
+    height: 112px;
+    line-height: 1.5;
+    border-radius: 12px !important;
+}
+
+#task-description {
+    display: block;
+    max-height: 220px;
+}
+
+#task-form > .form-group:last-of-type {
+    margin-top: 8px;
 }
 
 .form-group input[type="date"] {
@@ -306,7 +325,8 @@ body {
     text-align: left;
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group textarea:focus {
     background-color: var(--bg-main);
     border-color: transparent;
     box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.18);
@@ -830,6 +850,15 @@ body {
     font-weight: 600;
     color: var(--text-primary);
     line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.task-description {
+    color: var(--text-secondary);
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.45;
+    white-space: pre-wrap;
     overflow-wrap: anywhere;
 }
 
@@ -1750,7 +1779,7 @@ textarea,
 }
 
 #dashboard-view .navbar {
-    padding: 14px 0;
+    padding: 6px 0;
     background: #ffffff;
     border-bottom: 0;
     -webkit-backdrop-filter: none;
@@ -1767,7 +1796,7 @@ textarea,
 }
 
 #dashboard-view .logo-img {
-    height: 26px;
+    height: 22px;
 }
 
 #dashboard-view .logo-text {
@@ -1776,8 +1805,8 @@ textarea,
 }
 
 #dashboard-view .avatar-btn {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     background: var(--bg-muted);
     color: var(--text-primary);
     font-size: 13px;
@@ -1785,6 +1814,9 @@ textarea,
 }
 
 #dashboard-view .account-trigger {
+    height: 32px;
+    padding-top: 0;
+    padding-bottom: 0;
     box-shadow: none;
     border: 0;
     border-radius: var(--radius-full);
@@ -1841,10 +1873,14 @@ textarea,
 }
 
 #dashboard-view .stats-group {
+    position: relative;
     display: grid;
     width: min(100%, 380px);
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    gap: 0;
+    overflow: hidden;
+    background: var(--bg-main);
+    border-radius: var(--radius-full);
 }
 
 #dashboard-view .stat-item {
@@ -1854,9 +1890,20 @@ textarea,
     justify-content: space-between;
     gap: 12px;
     padding: 12px 24px;
-    background: var(--bg-main);
+    background: transparent;
     border: 0;
-    border-radius: var(--radius-full);
+    border-radius: 0;
+}
+
+#dashboard-view .stats-group::after {
+    content: "";
+    position: absolute;
+    top: 24%;
+    bottom: 24%;
+    left: 50%;
+    width: 1px;
+    background: var(--border-color);
+    transform: translateX(-50%);
 }
 
 #dashboard-view .stat-label {
@@ -1893,9 +1940,9 @@ textarea,
 }
 
 #dashboard-view .tabs {
-    gap: 2px;
-    padding: 4px;
-    background: var(--bg-muted);
+    gap: 4px;
+    padding: 3px;
+    background: #fff;
     border: 0;
     border-radius: var(--radius-full);
     box-shadow: none;
@@ -1906,15 +1953,21 @@ textarea,
 #dashboard-view .tab-btn {
     min-height: 36px;
     padding: 7px 12px;
+    background: transparent;
+    border: 1px solid transparent;
     color: var(--text-secondary);
     font-size: 12px;
     font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
 
 #dashboard-view .tab-btn.active {
-    background: var(--bg-main);
-    color: var(--text-primary);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    background: var(--accent-blue);
+    border-color: var(--accent-blue);
+    color: var(--accent-blue-text);
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
 }
 
 #dashboard-view .search-sort {
@@ -2355,10 +2408,17 @@ textarea,
     }
 
     .form-group input,
+    .form-group textarea,
     .settings-section select {
         height: 56px;
         border-radius: 9999px;
         padding: 12px 16px;
+    }
+
+    .form-group textarea {
+        height: 112px;
+        border-radius: 12px !important;
+        resize: vertical;
     }
 
     .form-row {
@@ -2584,7 +2644,7 @@ textarea,
     }
 
     #dashboard-view .navbar {
-        padding: calc(12px + env(safe-area-inset-top)) 16px 12px;
+        padding: calc(6px + env(safe-area-inset-top)) 16px 6px;
     }
 
     #dashboard-view .nav-container {
@@ -2646,7 +2706,7 @@ textarea,
     #dashboard-view .stats-group {
         width: auto;
         min-width: 0;
-        gap: 6px;
+        gap: 0;
     }
 
     #dashboard-view .stat-item {
@@ -2658,7 +2718,7 @@ textarea,
         justify-content: center;
         gap: 0;
         padding: 4px 6px;
-        border-radius: var(--radius-full);
+        border-radius: 0;
     }
 
     #dashboard-view .stat-label {
