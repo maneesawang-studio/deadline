@@ -83,6 +83,7 @@ button {
 }
 
 body {
+    touch-action: manipulation;
     font-family: 'Inter', 'Noto Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--bg-subtle);
     color: var(--text-primary);
