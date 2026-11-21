@@ -1942,7 +1942,7 @@ textarea,
 #dashboard-view .tabs {
     gap: 4px;
     padding: 3px;
-    background: #fff;
+    background: var(--bg-main);
     border: 0;
     border-radius: var(--radius-full);
     box-shadow: none;
@@ -1968,6 +1968,10 @@ textarea,
     color: var(--accent-blue-text);
     font-weight: 600;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+}
+
+[data-theme="dark"] #dashboard-view .tab-btn.active {
+    color: #ffffff;
 }
 
 #dashboard-view .search-sort {
@@ -2114,6 +2118,14 @@ textarea,
 }
 
 @media (max-width: 810px) {
+    #dashboard-view .sort-box select {
+        font-size: 12px;
+    }
+
+    #dashboard-view .sort-box select:focus {
+        font-size: 12px !important;
+    }
+
     .navbar {
         padding: 12px 16px;
         padding-top: calc(12px + env(safe-area-inset-top));
@@ -2332,7 +2344,7 @@ textarea,
     }
 
     .task-title {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 500;
     }
 
