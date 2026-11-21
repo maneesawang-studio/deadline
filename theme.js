@@ -54,15 +54,15 @@ window.deadlineRoutes = {
     getPostLoginUrl: () => {
         try {
             const savedUrl = localStorage.getItem(routeKey);
-            if (!savedUrl) return '../app/';
+            if (!savedUrl) return new URL('app/', document.baseURI).href;
             const url = new URL(savedUrl);
             if (url.origin !== location.origin || /\/login\/?$/.test(url.pathname)) {
-                return '../app/';
+                return new URL('app/', document.baseURI).href;
             }
             return url.href;
         } catch (error) {
             console.warn('Could not read the page to return to after login.', error);
-            return '../app/';
+            return new URL('app/', document.baseURI).href;
         }
     }
 };

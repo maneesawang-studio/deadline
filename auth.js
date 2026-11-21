@@ -41,7 +41,8 @@ if (configIsReady) {
     auth = getAuth(initializeApp(firebaseConfig));
     onAuthStateChanged(auth, user => {
         if (user) {
-            const destination = window.deadlineRoutes?.getPostLoginUrl() || '../app/';
+            const destination = window.deadlineRoutes?.getPostLoginUrl()
+                || new URL('app/', document.baseURI).href;
             window.location.replace(destination);
         }
     });
