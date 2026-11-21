@@ -9,13 +9,13 @@ Deadline is a static Thai task planner. `/` is the public landing page, `/app/` 
 3. Create a **Cloud Firestore** database.
 4. Publish the rules in `firestore.rules` using the Firestore Rules tab or Firebase CLI. Do not deploy with open/test rules.
 5. Copy the Web app's `apiKey`, `authDomain`, `projectId`, and `appId` into `firebase-config.js`.
-6. In **Authentication → Settings → Authorized domains**, ensure your GitHub Pages domain is listed (for example, `username.github.io`).
+6. In **Authentication → Settings → Authorized domains**, add `dead2line.com` and keep your GitHub Pages domain listed if you still use it for testing.
 
 Firebase Web app configuration is public client configuration. Never put a Firebase service-account key or Admin SDK credentials in this project. Firestore Security Rules—not hiding the web config—protect user data.
 
 ## Publish with GitHub Pages
 
-Push the project files to a GitHub repository. In **Settings → Pages**, choose deployment from the `main` branch and `/ (root)`, then save. GitHub Pages serves the public `index.html` landing page; signed-in users can open `/app/` to manage their tasks, while visitors who are not signed in are sent to `/login/`. No build step is required. Use the published HTTPS URL to test account creation, sign-in, and task syncing on another device.
+Push the project files to a GitHub repository. In **Settings → Pages**, choose deployment from the `main` branch and `/ (root)`, set the custom domain to `dead2line.com`, and enable **Enforce HTTPS** after the certificate is ready. The `CNAME` file keeps the custom domain configured across deployments; DNS is managed at the domain provider. GitHub Pages serves the public `index.html` landing page; signed-in users can open `/app/` to manage their tasks, while visitors who are not signed in are sent to `/login/`. No build step is required. Use `https://dead2line.com/` to test account creation, sign-in, and task syncing on another device.
 
 ## Local preview
 
