@@ -21,8 +21,10 @@ function restoreLastPageInInstalledApp() {
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches
         || window.matchMedia('(display-mode: fullscreen)').matches
         || window.navigator.standalone === true;
+    const hasSameOriginReferrer = document.referrer
+        && new URL(document.referrer).origin === location.origin;
 
-    if (!isAppPage || !isStandalone) return false;
+    if (!isAppPage || !isStandalone || hasSameOriginReferrer) return false;
 
     let savedUrl;
     try {

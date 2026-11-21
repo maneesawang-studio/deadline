@@ -21,6 +21,7 @@ let searchQuery = '';
 let sortOrder = 'due-asc';
 let unsubscribeTasks = null;
 let currentUser = null;
+let modalScrollPosition = 0;
 
 const userAvatar = document.getElementById('user-avatar');
 const accountMenuButton = document.getElementById('account-menu-btn');
@@ -137,16 +138,32 @@ function closeAccountMenu(restoreFocus = false) {
     if (restoreFocus) accountMenuButton.focus();
 }
 
+function lockPageScroll() {
+    if (document.body.classList.contains('modal-open')) return;
+    modalScrollPosition = window.scrollY;
+    document.body.classList.add('modal-open');
+    document.body.style.top = `-${modalScrollPosition}px`;
+}
+
+function unlockPageScroll() {
+    if (document.querySelector('.modal-overlay.open')) return;
+    document.body.classList.remove('modal-open');
+    document.body.style.top = '';
+    window.scrollTo(0, modalScrollPosition);
+}
+
 function openSettings() {
     closeAccountMenu();
     settingsMessage.textContent = '';
     themePreferenceSelect.value = window.deadlineTheme.getPreference();
+    lockPageScroll();
     settingsModal.classList.add('open');
     closeSettingsBtn.focus();
 }
 
 function closeSettings() {
     settingsModal.classList.remove('open');
+    unlockPageScroll();
     accountMenuButton.focus();
 }
 
@@ -417,6 +434,7 @@ function editTask(task) {
 }
 
 function openModal() {
+    lockPageScroll();
     taskModal.classList.add('open');
     taskTitleInput.focus();
 }
@@ -433,6 +451,7 @@ function resetTaskForm() {
 
 function closeModal() {
     taskModal.classList.remove('open');
+    unlockPageScroll();
     resetTaskForm();
     openModalBtn.focus();
 }

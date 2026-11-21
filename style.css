@@ -92,6 +92,14 @@ body {
     transition: background-color 0.2s, color 0.2s;
 }
 
+body.modal-open {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
 /* จัดการหน้าจอสลับ View */
 .view {
     display: none;
@@ -970,6 +978,7 @@ body {
 .modal-overlay {
 position: fixed;
 inset: 0;
+overscroll-behavior: contain;
 background: var(--backdrop);
  -webkit-backdrop-filter: blur(12px);
  backdrop-filter: blur(12px);
