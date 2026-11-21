@@ -2767,7 +2767,7 @@ textarea,
         grid-template-columns: 76px minmax(0, 1fr) 44px;
         gap: 10px;
         min-height: 108px;
-        padding: 24px 12px 24px 12px;
+        padding: 24px 0px 24px 12px;
     }
 
     #dashboard-view .task-card:not(:last-child)::after {
