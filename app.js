@@ -16,7 +16,7 @@ import {
 import { firebaseConfig } from './firebase-config.js';
 
 let tasks = [];
-let currentFilter = 'all';
+let currentFilter = 'active';
 let searchQuery = '';
 let sortOrder = 'due-asc';
 let unsubscribeTasks = null;
@@ -363,6 +363,17 @@ function renderTaskCard(task) {
     return card;
 }
 
+function setActiveFilter(filter) {
+    if (filter !== 'active' && filter !== 'completed') return;
+    currentFilter = filter;
+    tabBtns.forEach(tab => {
+        const isActive = tab.dataset.filter === filter;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-pressed', String(isActive));
+    });
+    renderTasks();
+}
+
 function renderTasks() {
     const activeCount = tasks.filter(task => !task.completed).length;
     const completedCount = tasks.filter(task => task.completed).length;
@@ -372,8 +383,7 @@ function renderTasks() {
     const query = searchQuery.toLocaleLowerCase();
     const filtered = tasks.filter(task => {
         const title = typeof task.title === 'string' ? task.title : '';
-        const matchesFilter = currentFilter === 'all' ||
-            (currentFilter === 'active' && !task.completed) ||
+        const matchesFilter = (currentFilter === 'active' && !task.completed) ||
             (currentFilter === 'completed' && task.completed);
         const description = typeof task.description === 'string' ? task.description : '';
         return matchesFilter &&
@@ -403,6 +413,7 @@ function getTaskRef(id) {
 async function toggleComplete(id, completed) {
     try {
         await updateDoc(getTaskRef(id), { completed });
+        setActiveFilter(completed ? 'completed' : 'active');
         setDashboardMessage();
     } catch (error) {
         setDashboardMessage(getErrorMessage(error, 'อัปเดตสถานะงาน'));
@@ -536,14 +547,7 @@ taskForm.addEventListener('submit', async event => {
 
 tabBtns.forEach(button => {
     button.addEventListener('click', () => {
-        tabBtns.forEach(tab => {
-            tab.classList.remove('active');
-            tab.setAttribute('aria-pressed', 'false');
-        });
-        button.classList.add('active');
-        button.setAttribute('aria-pressed', 'true');
-        currentFilter = button.dataset.filter;
-        renderTasks();
+        setActiveFilter(button.dataset.filter);
     });
 });
 
