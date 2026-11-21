@@ -3,6 +3,69 @@ const accountThemeToggle = document.getElementById('account-theme-toggle');
 const accountThemeLabel = document.getElementById('account-theme-label');
 const colorScheme = window.matchMedia('(prefers-color-scheme: dark)');
 let savedTheme = null;
+const routeKey = 'deadline_last_page';
+
+function rememberCurrentRoute() {
+    const isLoginPage = /\/login\/?$/.test(location.pathname);
+    if (isLoginPage) return;
+
+    try {
+        localStorage.setItem(routeKey, location.href);
+    } catch (error) {
+        console.warn('Could not remember the last page.', error);
+    }
+}
+
+function restoreLastPageInInstalledApp() {
+    const isAppPage = /\/app\/?$/.test(location.pathname);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches
+        || window.matchMedia('(display-mode: fullscreen)').matches
+        || window.navigator.standalone === true;
+
+    if (!isAppPage || !isStandalone) return false;
+
+    let savedUrl;
+    try {
+        savedUrl = localStorage.getItem(routeKey);
+    } catch (error) {
+        console.warn('Could not read the last page.', error);
+        return false;
+    }
+
+    if (!savedUrl) return false;
+
+    try {
+        const url = new URL(savedUrl);
+        const isSameOrigin = url.origin === location.origin;
+        const isAppPage = /\/app\/?$/.test(url.pathname);
+        const isLoginPage = /\/login\/?$/.test(url.pathname);
+        if (isSameOrigin && !isAppPage && !isLoginPage && url.href !== location.href) {
+            location.replace(url.href);
+            return true;
+        }
+    } catch (error) {
+        console.warn('Could not restore the last page.', error);
+    }
+    return false;
+}
+
+window.deadlineRoutes = {
+    remember: rememberCurrentRoute,
+    getPostLoginUrl: () => {
+        try {
+            const savedUrl = localStorage.getItem(routeKey);
+            if (!savedUrl) return '../app/';
+            const url = new URL(savedUrl);
+            if (url.origin !== location.origin || /\/login\/?$/.test(url.pathname)) {
+                return '../app/';
+            }
+            return url.href;
+        } catch (error) {
+            console.warn('Could not read the page to return to after login.', error);
+            return '../app/';
+        }
+    }
+};
 
 try {
     const storedTheme = localStorage.getItem('deadline_theme');
@@ -92,3 +155,8 @@ function toggleTheme() {
 
 if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
 if (accountThemeToggle) accountThemeToggle.addEventListener('click', toggleTheme);
+
+const isRestoringDeadlineRoute = restoreLastPageInInstalledApp();
+if (!isRestoringDeadlineRoute) {
+    rememberCurrentRoute();
+}
