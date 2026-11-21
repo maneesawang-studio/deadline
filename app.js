@@ -74,7 +74,7 @@ if (configIsReady) {
     db = getFirestore(app);
     onAuthStateChanged(auth, handleAuthState);
 } else {
-    window.location.replace('./login.html');
+    window.location.replace('../login/');
 }
 
 function setDashboardMessage(message = '') {
@@ -110,7 +110,7 @@ function handleAuthState(user) {
 
     if (!user) {
         tasks = [];
-        window.location.replace('./login.html');
+        window.location.replace('../login/');
         return;
     }
 

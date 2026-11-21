@@ -8,9 +8,10 @@ const configIsReady = ['apiKey', 'authDomain', 'projectId', 'appId']
     .every(key => typeof firebaseConfig[key] === 'string' && firebaseConfig[key].trim());
 
 function updateAuthLinks(user) {
-    authLink.href = user ? './app.html' : './login.html';
+    const destination = user ? 'app/' : 'login/';
+    authLink.href = new URL(destination, document.baseURI).href;
     authLink.textContent = user ? 'ไปที่งาน' : 'เข้าสู่ระบบ';
-    callToAction.href = user ? './app.html' : './login.html';
+    callToAction.href = new URL(destination, document.baseURI).href;
     callToAction.firstChild.textContent = user ? 'เปิดงานของฉัน ' : 'เริ่มจัดการงาน ';
 }
 

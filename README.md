@@ -1,6 +1,6 @@
 # Deadline
 
-Deadline is a static Thai task planner. `index.html` is the public landing page, `app.html` is the authenticated task dashboard, `login.html` handles sign-in and registration, and `about.html` describes the service. Firebase Authentication provides email/password accounts, and Cloud Firestore stores each user's tasks in a UID-scoped collection. The site can be hosted on GitHub Pages; Firebase remains the backend.
+Deadline is a static Thai task planner. `/` is the public landing page, `/app/` is the authenticated task dashboard, `/login/` handles sign-in and registration, and `/about/` describes the service. Firebase Authentication provides email/password accounts, and Cloud Firestore stores each user's tasks in a UID-scoped collection. The site can be hosted on GitHub Pages; Firebase remains the backend.
 
 ## Set up Firebase
 
@@ -15,7 +15,7 @@ Firebase Web app configuration is public client configuration. Never put a Fireb
 
 ## Publish with GitHub Pages
 
-Push the project files to a GitHub repository. In **Settings → Pages**, choose deployment from the `main` branch and `/ (root)`, then save. GitHub Pages serves the public `index.html` landing page; signed-in users can open `app.html` to manage their tasks, while visitors who are not signed in are sent to `login.html`. No build step is required. Use the published HTTPS URL to test account creation, sign-in, and task syncing on another device.
+Push the project files to a GitHub repository. In **Settings → Pages**, choose deployment from the `main` branch and `/ (root)`, then save. GitHub Pages serves the public `index.html` landing page; signed-in users can open `/app/` to manage their tasks, while visitors who are not signed in are sent to `/login/`. No build step is required. Use the published HTTPS URL to test account creation, sign-in, and task syncing on another device.
 
 ## Local preview
 
