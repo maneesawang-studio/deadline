@@ -9,34 +9,46 @@
   "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "assets/Deadline.png",
+      "src": "assets/Deadline/Deadline.png",
       "sizes": "4500x4500",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "assets/Deadline-192.png",
+      "src": "assets/Deadline/Deadline-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "assets/Deadline-512.png",
+      "src": "assets/Deadline/Deadline-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "assets/Deadline-white-192.png",
+      "src": "assets/Deadline-white/Deadline-white-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "assets/Deadline-white-512.png",
+      "src": "assets/Deadline-white/Deadline-white-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "assets/Deadline-absolutewhite/Deadline-absolutewhite-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/Deadline-absolutewhite/Deadline-absolutewhite-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }

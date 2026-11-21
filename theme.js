@@ -17,14 +17,10 @@ function applyTheme(theme) {
     document.documentElement.dataset.theme = theme;
 
     const favicon = document.getElementById('favicon-icon');
-    const appleTouchIcon = document.getElementById('apple-touch-icon');
     if (favicon) {
-        favicon.href = theme === 'dark' ? 'assets/Deadline-white.png' : 'assets/Deadline.png';
-    }
-    if (appleTouchIcon) {
-        appleTouchIcon.href = theme === 'dark'
-            ? 'assets/Deadline-white-180.png'
-            : 'assets/Deadline-180.png';
+        favicon.href = theme === 'dark'
+            ? 'assets/Deadline-white/Deadline-white.png'
+            : 'assets/Deadline/Deadline.png';
     }
 
     const label = theme === 'dark' ? 'สลับเป็นโหมดสว่าง' : 'สลับเป็นโหมดมืด';
@@ -51,6 +47,18 @@ function applyTheme(theme) {
 }
 
 applyTheme(savedTheme || (colorScheme.matches ? 'dark' : 'light'));
+
+const applySystemTheme = () => {
+    if (!savedTheme) {
+        applyTheme(colorScheme.matches ? 'dark' : 'light');
+    }
+};
+
+if (typeof colorScheme.addEventListener === 'function') {
+    colorScheme.addEventListener('change', applySystemTheme);
+} else if (typeof colorScheme.addListener === 'function') {
+    colorScheme.addListener(applySystemTheme);
+}
 
 function setThemePreference(preference) {
     if (!['system', 'light', 'dark'].includes(preference)) {
@@ -90,9 +98,3 @@ function toggleTheme() {
 
 if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
 if (accountThemeToggle) accountThemeToggle.addEventListener('click', toggleTheme);
-
-colorScheme.addEventListener('change', event => {
-    if (!savedTheme) {
-        applyTheme(event.matches ? 'dark' : 'light');
-    }
-});
