@@ -16,12 +16,6 @@ try {
 function applyTheme(theme) {
     document.documentElement.dataset.theme = theme;
 
-    const favicon = document.getElementById('favicon-icon');
-    if (favicon) {
-        favicon.href = theme === 'dark'
-            ? 'assets/Deadline-white/Deadline-white.png'
-            : 'assets/Deadline/Deadline.png';
-    }
 
     const label = theme === 'dark' ? 'สลับเป็นโหมดสว่าง' : 'สลับเป็นโหมดมืด';
     if (themeToggle) {
