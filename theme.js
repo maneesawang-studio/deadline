@@ -16,6 +16,17 @@ try {
 function applyTheme(theme) {
     document.documentElement.dataset.theme = theme;
 
+    const favicon = document.getElementById('favicon-icon');
+    const appleTouchIcon = document.getElementById('apple-touch-icon');
+    if (favicon) {
+        favicon.href = theme === 'dark' ? 'assets/Deadline-white.png' : 'assets/Deadline.png';
+    }
+    if (appleTouchIcon) {
+        appleTouchIcon.href = theme === 'dark'
+            ? 'assets/Deadline-white-180.png'
+            : 'assets/Deadline-180.png';
+    }
+
     const label = theme === 'dark' ? 'สลับเป็นโหมดสว่าง' : 'สลับเป็นโหมดมืด';
     if (themeToggle) {
         themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
